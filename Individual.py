@@ -1,4 +1,5 @@
-class Individual:
+#class for individual
+class Individual: 
     def __init__(self, id):
         self.id = id
         self.name = None
