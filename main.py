@@ -1,17 +1,28 @@
+from process_output import save_information, print_tables
+
 def parse_gedcom(path, output_path):
     """Parses the file"""
+    valid_outputs = []
     try:
         with open(path) as fp, open(output_path, 'w') as out:
             for line in fp:
                 line = line.strip()
-                print('-->' + line)
-                out.write('-->' + line + '\n')
+                # print('-->' + line)
+                # out.write('-->' + line + '\n')
 
                 level, tag, valid, arguments = check_valid_input(line)
-                output = '<--{}|{}|{}|{}'.format(level, tag, valid, arguments)
-                
-                out.write(output + '\n')
-                print(output)
+                if valid == 'Y':
+                    valid_outputs.append((level, tag, arguments))
+
+                # output = '<--{}|{}|{}|{}'.format(level, tag, valid, arguments)
+                # out.write(output + '\n')
+                # print(output)
+            
+            # process the information and save it
+            individuals, families = save_information(valid_outputs)
+            out.write(str(print_tables(individuals, 'INDI')) + '\n')
+            out.write(str(print_tables(families, 'FAM')))
+            
     except FileNotFoundError:
         print('File not found')
 

@@ -9,5 +9,13 @@ class Family:
         # Wife
         self.wid = None
         self.wname = None
-        self.children = {}
+        self.children = set()
+
+        self.map = {
+            'MARR': 'married',
+            'HUSB' : 'hid',
+            'WIFE': 'wid',
+            'CHIL': self.children,
+            'DIV': 'divorce'
+        }
         
