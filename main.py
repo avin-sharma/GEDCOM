@@ -1,3 +1,5 @@
+import os
+
 from process_output import save_information, print_tables
 
 def parse_gedcom(path, output_path):
@@ -53,4 +55,8 @@ def check_valid_input(line):
     return level, tag, valid, arguments
 
 if __name__ == "__main__":
-    parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
+    current_directory = os.getcwd()
+    file_name = 'Imaginary-Family.ged'
+    file_path = os.path.join(current_directory, file_name)
+    # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
+    parse_gedcom(file_path, 'output.txt')
