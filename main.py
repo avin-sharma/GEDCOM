@@ -59,4 +59,4 @@ if __name__ == "__main__":
     file_name = 'Imaginary-Family.ged'
     file_path = os.path.join(current_directory, file_name)
     # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
-    parse_gedcom(file_path, 'output.txt')
+    parse_gedcom(file_path, 'outputs/output.txt')
