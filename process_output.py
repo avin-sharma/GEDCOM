@@ -24,7 +24,6 @@ def save_information(inputs):
     families = {}
 
     for level, tag, arguments in inputs:
-        print(level, tag, arguments)
         active_tags[level] = tag
 
         if tag == 'INDI' or tag == 'FAM':
@@ -50,12 +49,15 @@ def save_information(inputs):
     
     for id in individuals:
         current = individuals[id]
+        deathday = None
         if current.birth:
             birthday = datetime.strptime(current.birth, '%d %b %Y')
 
             if current.death:
                 deathday = datetime.strptime(current.death, '%d %b %Y')
                 current.alive = False if deathday < datetime.now() else True
+                if deathday > datetime.now():
+                    deathday =  datetime.now()
             else:
                 deathday =  datetime.now()
             difference = deathday - birthday
