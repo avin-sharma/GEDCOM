@@ -85,7 +85,7 @@ def print_tables(data, type):
             current.gender if current.gender else 'NA',
             current.birth if current.birth else 'NA',
             current.age if current.age else 'NA',
-            current.alive if current.alive else 'NA',
+            current.alive,
             current.death if current.death else 'NA',
             current.child if current.child else 'NA', 
             current.spouse if current.spouse else 'NA'])
