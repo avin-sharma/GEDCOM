@@ -22,7 +22,9 @@ def parse_gedcom(path, output_path):
             
             # process the information and save it
             individuals, families = save_information(valid_outputs)
-            out.write(str(print_tables(individuals, 'INDI')) + '\n')
+            out.write('Individuals\n')
+            out.write(str(print_tables(individuals, 'INDI')))
+            out.write('\n\nFamilies\n')
             out.write(str(print_tables(families, 'FAM')))
             
     except FileNotFoundError:
