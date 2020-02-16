@@ -4,6 +4,8 @@ from family import Family
 from datetime import datetime
 from prettytable import PrettyTable
 
+from helpers import check_and_convert_string_to_date, convert_date_to_string
+
 def save_information(inputs):
     """
     Takes input array and saves the information in data structures.
@@ -40,21 +42,25 @@ def save_information(inputs):
         if level == 0:
             continue
         
+        # Since all the three fields are sets we add elements to them.
         if tag in ['FAMC', 'FAMS', 'CHIL']:
             active_entity.map[tag].add(arguments)
         else:
+            # If we have a date tag convert argument to datetime
             if level == 2:
                 tag = active_tags[1]
+                arguments = check_and_convert_string_to_date(arguments)
+
             setattr(active_entity, active_entity.map[tag], arguments)
     
     for id in individuals:
         current = individuals[id]
         deathday = None
         if current.birth:
-            birthday = datetime.strptime(current.birth, '%d %b %Y')
+            birthday = current.birth
 
             if current.death:
-                deathday = datetime.strptime(current.death, '%d %b %Y')
+                deathday = current.death
                 current.alive = False if deathday < datetime.now() else True
                 if deathday > datetime.now():
                     deathday =  datetime.now()
@@ -83,10 +89,10 @@ def print_tables(data, type):
             table.add_row([current.id, 
             current.name if current.name else 'NA',
             current.gender if current.gender else 'NA',
-            current.birth if current.birth else 'NA',
+            convert_date_to_string(current.birth) if current.birth else 'NA',
             current.age if current.age else 'NA',
             current.alive,
-            current.death if current.death else 'NA',
+            convert_date_to_string(current.death) if current.death else 'NA',
             current.child if current.child else 'NA', 
             current.spouse if current.spouse else 'NA'])
     else:
@@ -95,8 +101,8 @@ def print_tables(data, type):
             current = data[key]
             table.add_row([
                 current.id,
-                current.married if current.married else 'NA',
-                current.divorced if current.divorced else 'NA',
+                convert_date_to_string(current.married) if current.married else 'NA',
+                convert_date_to_string(current.divorced) if current.divorced else 'NA',
                 current.hid if current.hid else 'NA',
                 current.hname if current.hname else 'NA',
                 current.wid if current.wid else 'NA',
