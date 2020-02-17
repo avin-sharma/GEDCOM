@@ -1,28 +1,34 @@
 Individuals
-+-------+----------------+--------+-------------+-----+-------+-------------+----------+------------------+
-|   ID  |      Name      | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
-+-------+----------------+--------+-------------+-----+-------+-------------+----------+------------------+
-| @I10@ |  Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |    NA    |     {'@F2@'}     |
-| @I11@ |  Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |    NA    |     {'@F2@'}     |
-| @I12@ |  Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |    NA    |     {'@F5@'}     |
-|  @I1@ | James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     | {'@F1@'} |        NA        |
-|  @I2@ |  Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 | {'@F2@'} |     {'@F1@'}     |
-|  @I3@ | Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F3@', '@F1@'} |
-|  @I4@ |  Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     | {'@F6@'} | {'@F3@', '@F5@'} |
-|  @I5@ |  Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     | {'@F3@'} |        NA        |
-|  @I6@ | Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |    NA    |     {'@F6@'}     |
-|  @I7@ | Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |    NA    |     {'@F6@'}     |
-|  @I8@ | Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |    NA    |     {'@F4@'}     |
-|  @I9@ |  Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |    NA    |     {'@F4@'}     |
-+-------+----------------+--------+-------------+-----+-------+-------------+----------+------------------+
++-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
+|   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
++-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
+| @I10@ |   Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |    NA    |     {'@F4@'}     |
+| @I11@ |   Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |    NA    |     {'@F2@'}     |
+| @I12@ |   Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |    NA    |     {'@F2@'}     |
+| @I13@ |   Sofia Milano  |   F    |      NA     |  NA |  True |      NA     | {'@F6@'} |     {'@F8@'}     |
+| @I14@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |    NA    |     {'@F8@'}     |
+| @I15@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     | {'@F8@'} |     {'@F7@'}     |
+|  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     | {'@F1@'} |        NA        |
+|  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 | {'@F2@'} |     {'@F1@'}     |
+|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F3@', '@F1@'} |
+|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     | {'@F6@'} | {'@F3@', '@F5@'} |
+|  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |    NA    |     {'@F5@'}     |
+|  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     | {'@F3@'} |     {'@F7@'}     |
+|  @I7@ |  Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |    NA    |     {'@F6@'}     |
+|  @I8@ |  Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |    NA    |     {'@F6@'}     |
+|  @I9@ |  Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |    NA    |     {'@F4@'}     |
++-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
 
 Families
-+------+-------------+----------+------------+---------------+---------+---------------+----------+
-|  ID  |   Married   | Divorced | Husband ID |  Husband Name | Wife ID |   Wife Name   | Children |
-+------+-------------+----------+------------+---------------+---------+---------------+----------+
-| @F1@ | Sep 10 1992 |    NA    |    @I2@    |  Rick Highway |   @I3@  | Emma Broadway | {'@I1@'} |
-| @F2@ | Jan 01 1959 |    NA    |   @I10@    |  Ross Highway |  @I11@  |  Monica Bing  | {'@I2@'} |
-| @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano |   @I3@  | Emma Broadway | {'@I5@'} |
-| @F4@ |      NA     |    NA    |    @I8@    | Brad Broadway |   @I9@  |  Olivia Noway | {'@I3@'} |
-| @F5@ |      NA     |    NA    |    @I4@    |  Oscar Milano |  @I12@  |  Joan Watson  |    NA    |
-+------+-------------+----------+------------+---------------+---------+---------------+----------+
++------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
+|  ID  |   Married   | Divorced | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
++------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
+| @F1@ | Sep 10 1992 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
+| @F2@ | Jan 01 1959 |    NA    |   @I11@    |  Ross Highway  |  @I12@  |   Monica Bing   |      {'@I2@'}     |
+| @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
+| @F4@ |      NA     |    NA    |    @I9@    | Brad Broadway  |  @I10@  |   Olivia Noway  |      {'@I3@'}     |
+| @F5@ |      NA     |    NA    |    @I4@    |  Oscar Milano  |   @I5@  |   Joan Watson   |         NA        |
+| @F6@ |      NA     |    NA    |    @I7@    | Roberto Milano |   @I8@  |  Maria Ferrari  | {'@I4@', '@I13@'} |
+| @F7@ |      NA     |    NA    |    @I6@    |  Joey Milano   |  @I15@  | Isabella Milano |         NA        |
+| @F8@ |      NA     |    NA    |   @I14@    |  Jacob Milano  |  @I13@  |   Sofia Milano  |     {'@I15@'}     |
++------+-------------+----------+------------+----------------+---------+-----------------+-------------------+

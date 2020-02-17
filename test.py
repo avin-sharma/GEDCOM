@@ -4,7 +4,7 @@ import unittest
 from main import parse_gedcom
 from family import Family
 from individual import Individual
-from marriage_checkers import is_alive, bigamy
+from marriage_checkers import is_alive, bigamy, first_cousins_married
 
 current_directory = os.getcwd()
 # file_name = 'proj02test.ged'
@@ -33,7 +33,14 @@ class TestGEDCOM(unittest.TestCase):
 
         # Arya and Noah ferris have both been married twice. Arya's partner passed
         # away so she is fine(in a monogamous marriage)! Noah should not be(bigamy).
-        self.assertEqual(bigamy(individuals, families), 'Noah Ferris has more than 1 active marriages!')
+        self.assertEqual(bigamy(individuals, families), ['Noah Ferris has more than 1 active marriages!'])
+    
+    def test_US_19(self):
+        file_name = 'US_19.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+
+        self.assertEqual(first_cousins_married(individuals, families), ['Cousin 2 is married to his first cousin Cousin 1!'])
 
 
 if __name__ == "__main__":

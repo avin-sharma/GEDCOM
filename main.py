@@ -1,7 +1,7 @@
 import os
 
 from process_output import save_information, print_tables
-from marriage_checkers import bigamy
+from marriage_checkers import bigamy, first_cousins_married
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -65,4 +65,8 @@ if __name__ == "__main__":
     file_path = os.path.join(current_directory, file_name)
     # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
     individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
-    print(bigamy(individuals, families)) # Oscar Milano
+    for warning in bigamy(individuals, families):
+        print(warning) # Oscar Milano
+
+    for warning in first_cousins_married(individuals, families):
+        print(warning)
