@@ -6,7 +6,7 @@ def bigamy(individuals, families):
     Marriage should not occur during marriage to another spouse.
     
     """
-
+    warnings = []
     # Find of someone is married once
     # Then check if they dont have any other active marriage(married before today).
     # Ignore active marriages with dead(death before today) spouses.
@@ -18,7 +18,9 @@ def bigamy(individuals, families):
                 count += 1
         
         if count > 1:
-            return f'{individual.name} has more than 1 active marriages!'
+            warnings.append(f'{individual.name} has more than 1 active marriages!')
+    
+    return warnings
 
 def is_married(individuals, families, family_id):
     """
@@ -42,6 +44,62 @@ def is_married(individuals, families, family_id):
 
 def is_alive(individuals, individual_id):
     """
-    check if the individual with the given id is alive.
+    Checks if the individual with the given id is alive.
     """
     return individuals[individual_id].alive
+
+def first_cousins_married(individuals, families):
+    """
+    Searches and warns if first cousins are married
+    in the given families and individuals.
+
+    returns: a string(warning text)
+    """
+    warnings = []
+
+    for fam_id in families:
+        family = families[fam_id]
+        parents_child_at = set()
+
+        if not family.hid or not family.wid:
+            continue
+
+        husband = individuals[family.hid]
+        wife = individuals[family.wid]
+
+        # add grand_parents to the variable
+        h_parents_famc = get_parents_famc(individuals, families, family.hid)
+        w_parents_famc = get_parents_famc(individuals, families, family.wid)
+
+        if h_parents_famc.intersection(w_parents_famc):
+            warnings.append(f'{husband.name} is married to his first cousin {wife.name}!')
+    
+    return warnings
+        
+
+def get_parents_famc(individuals, families, indi_id):
+    """
+    Find grand parents of the given person.
+    """
+    if not indi_id:
+        return set()
+        
+    individual = individuals[indi_id]
+    parents_famc = set()
+
+    
+    if not individual.child:
+        return set()
+    
+    for famc in individual.child:
+        family = families[famc]
+        father = individuals[family.hid]
+        mother = individuals[family.wid]
+
+        if father.child:
+            parents_famc.update(father.child)
+        if mother.child:
+            parents_famc.update(mother.child)
+    
+    
+    return parents_famc

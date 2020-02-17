@@ -27,7 +27,8 @@ def save_information(inputs):
 
     for level, tag, arguments in inputs:
         active_tags[level] = tag
-
+        
+        # Saving previous 0 level entity.
         if tag == 'INDI' or tag == 'FAM':
             if active_entity:
                 if type(active_entity) is Individual:
@@ -53,10 +54,15 @@ def save_information(inputs):
 
             setattr(active_entity, active_entity.map[tag], arguments)
     
+    if type(active_entity) is Individual:
+        individuals[active_entity.id] = active_entity
+    else:
+        families[active_entity.id] = active_entity
+    
     # Update age for everyone, since its None in the beginning
     for id in individuals:
         current = individuals[id]
-        current.name = ''.join(current.name.split('/')[:-1])
+        current.name = ''.join(current.name.split('/'))
         
         deathday = None
         if current.birth:
