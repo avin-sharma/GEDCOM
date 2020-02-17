@@ -1,6 +1,7 @@
 import os
 
 from process_output import save_information, print_tables
+from marriage_checkers import bigamy
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -26,6 +27,8 @@ def parse_gedcom(path, output_path):
             out.write(str(print_tables(individuals, 'INDI')))
             out.write('\n\nFamilies\n')
             out.write(str(print_tables(families, 'FAM')))
+        
+        return individuals, families
             
     except FileNotFoundError:
         print('File not found')
@@ -58,7 +61,8 @@ def check_valid_input(line):
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
-    file_name = 'Imaginary-Family.ged'
+    file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
     # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
-    parse_gedcom(file_path, 'outputs/output.txt')
+    individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
+    print(bigamy(individuals, families)) # Oscar Milano
