@@ -53,8 +53,11 @@ def save_information(inputs):
 
             setattr(active_entity, active_entity.map[tag], arguments)
     
+    # Update age for everyone, since its None in the beginning
     for id in individuals:
         current = individuals[id]
+        current.name = ''.join(current.name.split('/')[:-1])
+        
         deathday = None
         if current.birth:
             birthday = current.birth
@@ -69,6 +72,7 @@ def save_information(inputs):
             difference = deathday - birthday
             current.age = (difference.days + difference.seconds//86400)//365
     
+    # Update the husband and wife name for everyone, since its None in the beginning.
     for id in families:
         current = families[id]
         if current.hid:

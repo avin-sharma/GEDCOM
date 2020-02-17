@@ -18,7 +18,7 @@ def bigamy(individuals, families):
                 count += 1
         
         if count > 1:
-            print(f'{individual.name} has more than 1 active marriage!')
+            return f'{individual.name} has more than 1 active marriages!'
 
 def is_married(individuals, families, family_id):
     """
@@ -35,7 +35,7 @@ def is_married(individuals, families, family_id):
         return False
     
     # if one of the partners has passed away, they are not married.
-    if not is_alive(family.hid) or not is_alive(family.wid):
+    if not is_alive(individuals, family.hid) or not is_alive(individuals, family.wid):
         return False
 
     return True
