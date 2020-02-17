@@ -5,6 +5,7 @@ def bigamy(individuals, families):
     User Story 11
     Marriage should not occur during marriage to another spouse.
     
+    returns: a list of warning strings.
     """
     warnings = []
     # Find of someone is married once
@@ -50,10 +51,11 @@ def is_alive(individuals, individual_id):
 
 def first_cousins_married(individuals, families):
     """
+    User Story 19
     Searches and warns if first cousins are married
     in the given families and individuals.
 
-    returns: a string(warning text)
+    returns: a list of warning strings
     """
     warnings = []
 
