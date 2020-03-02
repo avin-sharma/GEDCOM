@@ -11,7 +11,7 @@ def check_correct_gender(individuals, families):
                 if(hus_sex != "M"):
                     warnings.add(
                         f'{individual.name} has different gender than expected')
-            elif (family.wid != indi_id):
+            elif (family.wid == indi_id):
                 wife_sex = individual.gender
                 if(wife_sex != "F"):
                     warnings.add(
