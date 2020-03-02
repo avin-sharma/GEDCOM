@@ -2,6 +2,8 @@ import os
 
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
+from US16_21 import check_correct_gender, check_last_names
+
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -20,27 +22,28 @@ def parse_gedcom(path, output_path):
                 # output = '<--{}|{}|{}|{}'.format(level, tag, valid, arguments)
                 # out.write(output + '\n')
                 # print(output)
-            
+
             # process the information and save it
             individuals, families = save_information(valid_outputs)
             out.write('Individuals\n')
             out.write(str(print_tables(individuals, 'INDI')))
             out.write('\n\nFamilies\n')
             out.write(str(print_tables(families, 'FAM')))
-        
+
         return individuals, families
-            
+
     except FileNotFoundError:
         print('File not found')
+
 
 def check_valid_input(line):
     """
     Given a GEDCOM line, finds if it has valid tags
     """
     VALID_TAGS = {
-        0 : {'HEAD', 'TRLR', 'NOTE'},
-        1 : {'NAME', 'SEX', 'BIRT', 'DEAT', 'FAMC', 'FAMS', 'MARR', 'HUSB', 'WIFE', 'CHIL', 'DIV'},
-        2 : {'DATE'}
+        0: {'HEAD', 'TRLR', 'NOTE'},
+        1: {'NAME', 'SEX', 'BIRT', 'DEAT', 'FAMC', 'FAMS', 'MARR', 'HUSB', 'WIFE', 'CHIL', 'DIV'},
+        2: {'DATE'}
     }
 
     line = line.split()
@@ -51,13 +54,14 @@ def check_valid_input(line):
         tag = line[2]
         valid = 'Y'
         arguments = line[1]
-        
+
     else:
         tag, arguments = line[1], ' '.join(line[2:])
         if level < 3 and tag in VALID_TAGS[level]:
             valid = 'Y'
 
     return level, tag, valid, arguments
+
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
@@ -66,7 +70,13 @@ if __name__ == "__main__":
     # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
     individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
     for warning in bigamy(individuals, families):
-        print(warning) # Oscar Milano
+        print(warning)  # Oscar Milano
 
     for warning in first_cousins_married(individuals, families):
+        print(warning)
+
+    for warning in check_correct_gender(individuals, families):
+        print(warning)
+
+    for warning in check_last_names(individuals, families):
         print(warning)
