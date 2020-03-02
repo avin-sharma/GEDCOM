@@ -13,7 +13,7 @@ def check_correct_gender(individuals, families):
                         f'{individual.name} has different gender than expected')
             elif (family.wid != indi_id):
                 wife_sex = individual.gender
-                if(wife_sex == "F"):
+                if(wife_sex != "F"):
                     warnings.add(
                         f'{individual.name} has different gender than expected')
     return warnings
