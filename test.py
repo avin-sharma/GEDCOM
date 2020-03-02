@@ -57,7 +57,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_last_names(individuals, families), [
-                         'Noah Millow ahs different last name than his son Amit Shah'])
+                         'Amit Shah last name is diffrent than Noah Millow last name'])
 
     def test_US_21(self):
         file_name = 'US_21.ged'
@@ -66,7 +66,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_correct_gender(individuals, families), [
-                         'Noah Mellow has wrong gender(He is husband and it should be Male), Anita Millow has wrong gender (She is wife and it should be Female)'])
+                         'Noah Millow has different gender than expected', 'Amit Millow has different gender than expected'])
 
 
 if __name__ == "__main__":

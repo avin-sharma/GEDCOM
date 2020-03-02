@@ -2,19 +2,19 @@ from datetime import datetime
 
 
 def check_correct_gender(individuals, families):
-    warnings = set()
+    warnings = []
     for family in families.values():
         for indi_id in individuals:
             individual = individuals[indi_id]
             if (family.hid == indi_id):
                 hus_sex = individual.gender
                 if(hus_sex != "M"):
-                    warnings.add(
+                    warnings.append(
                         f'{individual.name} has different gender than expected')
             elif (family.wid == indi_id):
                 wife_sex = individual.gender
                 if(wife_sex != "F"):
-                    warnings.add(
+                    warnings.append(
                         f'{individual.name} has different gender than expected')
     return warnings
 
