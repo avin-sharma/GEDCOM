@@ -2,7 +2,7 @@ import os
 
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
-from jay import check_correct_gender, check_last_names
+from US16_21 import check_correct_gender, check_last_names
 
 
 def parse_gedcom(path, output_path):
