@@ -8,6 +8,11 @@ Individuals
 | @I13@ |   Sofia Milano  |   F    |      NA     |  NA |  True |      NA     | {'@F6@'} |     {'@F8@'}     |
 | @I14@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |    NA    |     {'@F8@'}     |
 | @I15@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     | {'@F8@'} |     {'@F7@'}     |
+
+|  @I1@ |  James Highway  |   M    | Mar 03 2020 |  -1 |  True |      NA     | {'@F1@'} |        NA        |
+|  @I2@ |   Rick Highway  |   M    | Mar 03 2021 |  -2 |  True | Mar 10 2020 | {'@F2@'} |     {'@F1@'}     |
+|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F3@', '@F1@'} |
+|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     | {'@F6@'} | {'@F5@', '@F3@'
 |  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     | {'@F1@'} |        NA        |
 |  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 | {'@F2@'} |     {'@F1@'}     |
 |  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F1@', '@F3@'} |
@@ -23,7 +28,7 @@ Families
 +------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
 |  ID  |   Married   | Divorced | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
 +------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
-| @F1@ | Sep 10 1992 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
+| @F1@ | Mar 02 2020 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
 | @F2@ | Jan 01 1959 |    NA    |   @I11@    |  Ross Highway  |  @I12@  |   Monica Bing   |      {'@I2@'}     |
 | @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
 | @F4@ |      NA     |    NA    |    @I9@    | Brad Broadway  |  @I10@  |   Olivia Noway  |      {'@I3@'}     |

@@ -1,0 +1,202 @@
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE Family 2
+1 DATE 17 FEB 2020
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I11@
+2 NAME Avin
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME James /Highway/
+2 GIVN James
+2 SURN Highway
+2 _MARNM Highway
+1 SEX M
+1 BIRT
+2 DATE 3 MAR 2020
+1 FAMC @F1@
+0 @I2@ INDI
+1 NAME Rick /Highway/
+2 GIVN Rick
+2 SURN Highway
+2 _MARNM Highway
+1 SEX M
+1 BIRT
+2 DATE 3 MAR 2021
+1 DEAT Y
+2 DATE 10 MAR 2020
+1 FAMS @F1@
+1 FAMC @F2@
+0 @I3@ INDI
+1 NAME Emma /Broadway/
+2 GIVN Emma
+2 SURN Broadway
+2 _MARNM Highway
+1 SEX F
+1 BIRT
+2 DATE 2 JAN 1962
+1 FAMS @F1@
+1 FAMS @F3@
+1 FAMC @F4@
+0 @I4@ INDI
+1 NAME Oscar /Milano/
+2 GIVN Oscar
+2 SURN Milano
+2 _MARNM Milano
+1 SEX M
+1 BIRT
+2 DATE 24 AUG 1960
+1 FAMS @F3@
+1 FAMS @F5@
+1 FAMC @F6@
+0 @I5@ INDI
+1 NAME Joan /Watson/
+2 GIVN Joan
+2 SURN Watson
+2 _MARNM Watson
+1 SEX F
+1 BIRT
+2 DATE 24 JUN 1964
+1 FAMS @F5@
+0 @I6@ INDI
+1 NAME Joey /Milano/
+2 GIVN Joey
+2 SURN Milano
+2 _MARNM Milano
+1 SEX M
+1 BIRT
+2 DATE 9 SEP 2001
+1 FAMS @F7@
+1 FAMC @F3@
+0 @I7@ INDI
+1 NAME Roberto /Milano/
+2 GIVN Roberto
+2 SURN Milano
+2 _MARNM Milano
+1 SEX M
+1 BIRT
+2 DATE 17 OCT 1930
+1 FAMS @F6@
+0 @I8@ INDI
+1 NAME Maria /Ferrari/
+2 GIVN Maria
+2 SURN Ferrari
+2 _MARNM Milano
+1 SEX F
+1 BIRT
+2 DATE 26 MAR 1932
+1 FAMS @F6@
+0 @I9@ INDI
+1 NAME Brad /Broadway/
+2 GIVN Brad
+2 SURN Broadway
+2 _MARNM Broadway
+1 SEX M
+1 BIRT
+2 DATE 8 NOV 1934
+1 FAMS @F4@
+0 @I10@ INDI
+1 NAME Olivia /Noway/
+2 GIVN Olivia
+2 SURN Noway
+2 _MARNM Broadway
+1 SEX F
+1 BIRT
+2 DATE 6 JAN 1933
+1 FAMS @F4@
+0 @I11@ INDI
+1 NAME Ross /Highway/
+2 GIVN Ross
+2 SURN Highway
+2 _MARNM Highway
+1 SEX M
+1 BIRT
+2 DATE 29 AUG 1932
+1 FAMS @F2@
+0 @I12@ INDI
+1 NAME Monica /Bing/
+2 GIVN Monica
+2 SURN Bing
+2 _MARNM Highway
+1 SEX F
+1 BIRT
+2 DATE 19 DEC 1934
+1 FAMS @F2@
+0 @I13@ INDI
+1 NAME Sofia /Milano/
+2 GIVN Sofia
+2 SURN Milano
+2 _MARNM Milano
+1 SEX F
+1 FAMS @F8@
+1 FAMC @F6@
+0 @I14@ INDI
+1 NAME Jacob /Milano/
+2 GIVN Jacob
+2 SURN Milano
+2 _MARNM Milano
+1 SEX M
+1 FAMS @F8@
+0 @I15@ INDI
+1 NAME Isabella /Milano/
+2 GIVN Isabella
+2 SURN Milano
+2 _MARNM Milano
+1 SEX F
+1 FAMS @F7@
+1 FAMC @F8@
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 MARR
+2 DATE 02 MAR 2020
+1 EVEN
+2 TYPE Ending
+1 _CURRENT N
+0 @F2@ FAM
+1 HUSB @I11@
+1 WIFE @I12@
+1 CHIL @I2@
+1 MARR
+2 DATE 1 JAN 1959
+1 _CURRENT Y
+0 @F3@ FAM
+1 HUSB @I4@
+1 WIFE @I3@
+1 CHIL @I6@
+1 MARR
+2 DATE 6 AUG 2000
+1 EVEN
+2 TYPE Ending
+1 _CURRENT N
+0 @F4@ FAM
+1 HUSB @I9@
+1 WIFE @I10@
+1 CHIL @I3@
+1 _CURRENT Y
+0 @F5@ FAM
+1 HUSB @I4@
+1 WIFE @I5@
+1 _CURRENT Y
+0 @F6@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I4@
+1 CHIL @I13@
+1 _CURRENT Y
+0 @F7@ FAM
+1 HUSB @I6@
+1 WIFE @I15@
+1 _CURRENT Y
+0 @F8@ FAM
+1 HUSB @I14@
+1 WIFE @I13@
+1 CHIL @I15@
+1 _CURRENT Y
+0 TRLR
