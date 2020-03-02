@@ -1,39 +1,43 @@
 Individuals
-+-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
-|   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
-+-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
-| @I10@ |   Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |    NA    |     {'@F4@'}     |
-| @I11@ |   Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |    NA    |     {'@F2@'}     |
-| @I12@ |   Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |    NA    |     {'@F2@'}     |
-| @I13@ |   Sofia Milano  |   F    |      NA     |  NA |  True |      NA     | {'@F6@'} |     {'@F8@'}     |
-| @I14@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |    NA    |     {'@F8@'}     |
-| @I15@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     | {'@F8@'} |     {'@F7@'}     |
 
-|  @I1@ |  James Highway  |   M    | Mar 03 2020 |  -1 |  True |      NA     | {'@F1@'} |        NA        |
-|  @I2@ |   Rick Highway  |   M    | Mar 03 2021 |  -2 |  True | Mar 10 2020 | {'@F2@'} |     {'@F1@'}     |
-|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F3@', '@F1@'} |
-|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     | {'@F6@'} | {'@F5@', '@F3@'
-|  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     | {'@F1@'} |        NA        |
-|  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 | {'@F2@'} |     {'@F1@'}     |
-|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     | {'@F4@'} | {'@F1@', '@F3@'} |
-|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     | {'@F6@'} | {'@F3@', '@F5@'} |
-|  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |    NA    |     {'@F5@'}     |
-|  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     | {'@F3@'} |     {'@F7@'}     |
-|  @I7@ |  Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |    NA    |     {'@F6@'}     |
-|  @I8@ |  Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |    NA    |     {'@F6@'}     |
-|  @I9@ |  Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |    NA    |     {'@F4@'}     |
-+-------+-----------------+--------+-------------+-----+-------+-------------+----------+------------------+
++-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
+|   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |   Child   |      Spouse      |
++-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
+| @I10@ |  Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |     NA    |     {'@F4@'}     |
+| @I11@ |   Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |     NA    |     {'@F4@'}     |
+| @I12@ |   Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |     NA    |     {'@F2@'}     |
+| @I13@ |   Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |     NA    |     {'@F2@'}     |
+| @I14@ |   Sofia Milano  |   F    |      NA     |  NA |  True |      NA     |  {'@F6@'} |     {'@F8@'}     |
+| @I15@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |     NA    |     {'@F8@'}     |
+| @I16@ |    Meet Smith   |   M    |      NA     |  NA |  True |      NA     | {'@F10@'} |     {'@F9@'}     |
+| @I17@ |    Anita Shah   |   F    |      NA     |  NA |  True |      NA     |     NA    |    {'@F10@'}     |
+| @I18@ |   Alina Smith   |   M    |      NA     |  NA |  True |      NA     |     NA    |     {'@F9@'}     |
+| @I19@ |    Loka Smith   |   F    |      NA     |  NA |  True |      NA     |  {'@F9@'} |    {'@F11@'}     |
+|  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     |  {'@F1@'} |    {'@F10@'}     |
+| @I20@ |   Evita Smith   |   F    |      NA     |  NA |  True |      NA     |     NA    |    {'@F11@'}     |
+|  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 |  {'@F2@'} |     {'@F1@'}     |
+|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     |  {'@F4@'} | {'@F1@', '@F3@'} |
+|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     |  {'@F6@'} | {'@F3@', '@F5@'} |
+|  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |     NA    |     {'@F5@'}     |
+|  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     |  {'@F3@'} |     {'@F7@'}     |
+|  @I7@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     |  {'@F8@'} |     {'@F7@'}     |
+|  @I8@ |  Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |     NA    |     {'@F6@'}     |
+|  @I9@ |  Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |     NA    |     {'@F6@'}     |
++-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
 
 Families
-+------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
-|  ID  |   Married   | Divorced | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
-+------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
-| @F1@ | Mar 02 2020 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
-| @F2@ | Jan 01 1959 |    NA    |   @I11@    |  Ross Highway  |  @I12@  |   Monica Bing   |      {'@I2@'}     |
-| @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
-| @F4@ |      NA     |    NA    |    @I9@    | Brad Broadway  |  @I10@  |   Olivia Noway  |      {'@I3@'}     |
-| @F5@ |      NA     |    NA    |    @I4@    |  Oscar Milano  |   @I5@  |   Joan Watson   |         NA        |
-| @F6@ |      NA     |    NA    |    @I7@    | Roberto Milano |   @I8@  |  Maria Ferrari  | {'@I13@', '@I4@'} |
-| @F7@ |      NA     |    NA    |    @I6@    |  Joey Milano   |  @I15@  | Isabella Milano |         NA        |
-| @F8@ |      NA     |    NA    |   @I14@    |  Jacob Milano  |  @I13@  |   Sofia Milano  |     {'@I15@'}     |
-+------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
++-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
+|   ID  |   Married   | Divorced | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
++-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
+| @F10@ |      NA     |    NA    |    @I1@    | James Highway  |  @I17@  |    Anita Shah   |     {'@I16@'}     |
+| @F11@ |      NA     |    NA    |   @I20@    |  Evita Smith   |  @I19@  |    Loka Smith   |         NA        |
+|  @F1@ | Sep 10 1992 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
+|  @F2@ | Jan 01 1959 |    NA    |   @I12@    |  Ross Highway  |  @I13@  |   Monica Bing   |      {'@I2@'}     |
+|  @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
+|  @F4@ |      NA     |    NA    |   @I10@    | Brad Broadway  |  @I11@  |   Olivia Noway  |      {'@I3@'}     |
+|  @F5@ |      NA     |    NA    |    @I4@    |  Oscar Milano  |   @I5@  |   Joan Watson   |         NA        |
+|  @F6@ |      NA     |    NA    |    @I8@    | Roberto Milano |   @I9@  |  Maria Ferrari  | {'@I14@', '@I4@'} |
+|  @F7@ |      NA     |    NA    |    @I6@    |  Joey Milano   |   @I7@  | Isabella Milano |         NA        |
+|  @F8@ |      NA     |    NA    |   @I15@    |  Jacob Milano  |  @I14@  |   Sofia Milano  |      {'@I7@'}     |
+|  @F9@ |      NA     |    NA    |   @I18@    |  Alina Smith   |  @I16@  |    Meet Smith   |     {'@I19@'}     |
++-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
