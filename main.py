@@ -2,6 +2,8 @@ import os
 
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
+
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from US16_21 import check_correct_gender, check_last_names
 
 
@@ -74,9 +76,22 @@ if __name__ == "__main__":
 
     for warning in first_cousins_married(individuals, families):
         print(warning)
+    
+    for warning in check_BirthDate(individuals):
+        print(warning)
+    for warning in check_MarriageDate(families):
+        print(warning)
+    for warning in check_DivorceDate(families):
+        print(warning)
+    for warning in check_DeathDate(individuals):
+        print(warning)
+    for warning in check_BirthBeforeMarriage(individuals,families):
+        print(warning)
+    
 
     for warning in check_correct_gender(individuals, families):
         print(warning)
 
     for warning in check_last_names(individuals, families):
         print(warning)
+
