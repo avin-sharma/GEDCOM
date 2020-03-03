@@ -6,6 +6,8 @@ from marriage_checkers import bigamy, first_cousins_married
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from US16_21 import check_correct_gender, check_last_names
 
+from name_birth import unique_name_and_birth
+
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -95,3 +97,5 @@ if __name__ == "__main__":
     for warning in check_last_names(individuals, families):
         print(warning)
 
+    for warning in unique_name_and_birth(individuals):
+        print(warning)
