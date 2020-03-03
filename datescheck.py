@@ -2,47 +2,51 @@
 ##US02 : Birth should occur before marriage of an individual
 from datetime import datetime
 currentDate = datetime.now()
-def check_BirthDate(individuals):
+def check_BirthDate(individuals, tag_positions):
 ##US01 : Dates (birth) should not be after the current date
     warnings = []
     for indi_id in individuals:
         individual = individuals[indi_id]
         if individual.birth != None:
             if individual.birth > currentDate: 
-                warnings.append(f'{individual.name} is born after current date')
+                num = tag_positions[indi_id]['BIRT']
+                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{individual.name} is born after current date')
     return warnings
 
-def check_MarriageDate(families):
+def check_MarriageDate(families, tag_positions):
 ##US01 : Dates (marriage) should not be after the current date
     warnings = []
     for fam_id in families:
         family = families[fam_id]
         if family.married != None:
             if family.married > currentDate:
-                warnings.append(f'{family.hname} and {family.wname} are married after current date')
+                num = tag_positions[fam_id]['MARR']
+                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{family.hname} and {family.wname} are married after current date')
     return warnings
 
-def check_DivorceDate(families):
+def check_DivorceDate(families, tag_positions):
 ##US01 : Dates (divorce) should not be after the current date
     warnings = []
     for fam_id in families:
         family = families[fam_id]
         if family.divorced != None:
             if family.divorced > currentDate:
-                warnings.append(f'{family.hname} and {family.wname} are divorced after current date')
+                num = tag_positions[fam_id]['DIV']
+                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{family.hname} and {family.wname} are divorced after current date')
     return warnings
 
-def check_DeathDate(individuals):
+def check_DeathDate(individuals, tag_positions):
 ##US01 : Dates (death) should not be after the current date
     warnings = []
     for indi_id in individuals:
         individual = individuals[indi_id]
         if individual.death != None:
             if individual.death > currentDate:
-                warnings.append(f'{individual.name} died after current date')
+                num = tag_positions[indi_id]['DEAT']
+                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{individual.name} died after current date')
     return warnings
 
-def check_BirthBeforeMarriage(individuals,families):
+def check_BirthBeforeMarriage(individuals,families, tag_positions):
 ##US02 : Birth should occur before marriage of an individual
     warnings = []
     for indi_id in individuals:
@@ -51,5 +55,6 @@ def check_BirthBeforeMarriage(individuals,families):
             family = families[fam_id]
             if individual.birth != None and family.married != None:
                 if individual.birth > family.married:
-                    warnings.append(f'{individual.name} Married before birth')
+                    num = tag_positions[indi_id]['BIRT']|tag_positions[fam_id]['MARR']
+                    warnings.append(f'ANOMALY: FAMILY: US02, line {num},{individual.name} Married before birth')
     return warnings

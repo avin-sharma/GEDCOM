@@ -1,26 +1,3 @@
-
-Individuals
-+------+---------+--------+-------------+-----+-------+-------+----------+------------------+
-|  ID  |   Name  | Gender |   Birthday  | Age | Alive | Death |  Child   |      Spouse      |
-+------+---------+--------+-------------+-----+-------+-------+----------+------------------+
-| @I1@ | Hp Pate |   F    | Jan 02 1970 |  50 |  True |   NA  | {'@F1@'} |        NA        |
-| @I2@ | Sa Pate |   M    | Apr 04 1954 |  65 |  True |   NA  |    NA    | {'@F1@', '@F2@'} |
-| @I3@ | PP Shah |   F    | Mar 06 1955 |  65 |  True |   NA  |    NA    |     {'@F1@'}     |
-| @I4@ | Lm Pate |   F    | May 11 1955 |  64 |  True |   NA  |    NA    | {'@F3@', '@F2@'} |
-| @I5@ | Sa Pate |   M    |      NA     |  NA |  True |   NA  |    NA    |     {'@F3@'}     |
-| @I6@ | Hk Pate |   M    | Jan 06 1970 |  50 |  True |   NA  | {'@F2@'} |        NA        |
-| @I7@ | Hp Pate |   F    | Jan 02 1970 |  50 |  True |   NA  | {'@F1@'} |        NA        |
-+------+---------+--------+-------------+-----+-------+-------+----------+------------------+
-
-Families
-+------+---------+----------+------------+--------------+---------+-----------+------------------+
-|  ID  | Married | Divorced | Husband ID | Husband Name | Wife ID | Wife Name |     Children     |
-+------+---------+----------+------------+--------------+---------+-----------+------------------+
-| @F1@ |    NA   |    NA    |    @I2@    |   Sa Pate    |   @I3@  |  PP Shah  | {'@I7@', '@I1@'} |
-| @F2@ |    NA   |    NA    |    @I2@    |   Sa Pate    |   @I4@  |  Lm Pate  |     {'@I6@'}     |
-| @F3@ |    NA   |    NA    |    @I5@    |   Sa Pate    |   @I4@  |  Lm Pate  |        NA        |
-+------+---------+----------+------------+--------------+---------+-----------+------------------+
-
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
 |   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |   Child   |      Spouse      |
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
@@ -38,13 +15,14 @@ Families
 | @I20@ |   Evita Smith   |   F    |      NA     |  NA |  True |      NA     |     NA    |    {'@F11@'}     |
 |  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 |  {'@F2@'} |     {'@F1@'}     |
 |  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     |  {'@F4@'} | {'@F1@', '@F3@'} |
-|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     |  {'@F6@'} | {'@F3@', '@F5@'} |
+|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     |  {'@F6@'} | {'@F5@', '@F3@'} |
 |  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |     NA    |     {'@F5@'}     |
 |  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     |  {'@F3@'} |     {'@F7@'}     |
 |  @I7@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     |  {'@F8@'} |     {'@F7@'}     |
 |  @I8@ |  Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |     NA    |     {'@F6@'}     |
 |  @I9@ |  Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |     NA    |     {'@F6@'}     |
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
+
 
 Families
 +-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
@@ -62,4 +40,7 @@ Families
 |  @F8@ |      NA     |    NA    |   @I15@    |  Jacob Milano  |  @I14@  |   Sofia Milano  |      {'@I7@'}     |
 |  @F9@ |      NA     |    NA    |   @I18@    |  Alina Smith   |  @I16@  |    Meet Smith   |     {'@I19@'}     |
 +-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
+
+ANOMALY: FAMILY: US11, line {56, 55}, Oscar Milano has more than 1 active marriages!
+ANOMALY: FAMILY: US19, line {232, 233, 83, 75} Joey Milano is married to his first cousin Isabella Milano!
 

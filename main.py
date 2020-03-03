@@ -15,8 +15,8 @@ def parse_gedcom(path, output_path):
     """Parses the file"""
     valid_outputs = []
     try:
-        with open(path) as fp, open(output_path, 'w') as out:
-            for num, line in enumerate(fp,1):
+        with open(path) as fp:
+            for num, line in enumerate(fp, 1):
                 line = line.strip()
                 # print('-->' + line)
                 # out.write('-->' + line + '\n')
@@ -30,13 +30,16 @@ def parse_gedcom(path, output_path):
                 # print(output)
 
             # process the information and save it
-            individuals, families = save_information(valid_outputs)
-            out.write('Individuals\n')
-            out.write(str(print_tables(individuals, 'INDI')))
-            out.write('\n\nFamilies\n')
-            out.write(str(print_tables(families, 'FAM')))
+            individuals, families, tag_positions = save_information(
+                valid_outputs)
+            print('Individuals')
+            print(str(print_tables(individuals, 'INDI')))
 
-        return individuals, families
+            print('\nFamilies')
+            print(str(print_tables(families, 'FAM')))
+            print()
+
+        return individuals, families, tag_positions
 
     except FileNotFoundError:
         print('File not found')
@@ -71,37 +74,37 @@ def check_valid_input(line):
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
-    file_name = 'test.ged'
+    file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
-    individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
-    
-    for warnings in US_25(individuals, families) :
-        print(f"This name and birthday of child {warnings} have duplicate values")
 
-    for warning in bigamy(individuals, families):
+    individuals, families, tag_positions = parse_gedcom(
+        file_path, 'outputs/output.txt')
+
+    for warning in bigamy(individuals, families, tag_positions):
         print(warning)  # Oscar Milano
 
-    for warning in first_cousins_married(individuals, families):
-        print(warning)
-    
-    for warning in check_BirthDate(individuals):
-        print(warning)
-    for warning in check_MarriageDate(families):
-        print(warning)
-    for warning in check_DivorceDate(families):
-        print(warning)
-    for warning in check_DeathDate(individuals):
-        print(warning)
-    for warning in check_BirthBeforeMarriage(individuals,families):
-        print(warning)
-    
-
-    for warning in check_correct_gender(individuals, families):
+    for warning in first_cousins_married(individuals, families, tag_positions):
         print(warning)
 
-    for warning in check_last_names(individuals, families):
+    for warning in check_BirthDate(individuals, tag_positions):
+        print(warning)
+    for warning in check_MarriageDate(families, tag_positions):
+        print(warning)
+    for warning in check_DivorceDate(families, tag_positions):
+        print(warning)
+    for warning in check_DeathDate(individuals, tag_positions):
+        print(warning)
+    for warning in check_BirthBeforeMarriage(individuals, families, tag_positions):
         print(warning)
 
-    for warning in unique_name_and_birth(individuals):
+    for warning in check_correct_gender(individuals, families, tag_positions):
         print(warning)
 
+    for warning in check_last_names(individuals, families, tag_positions):
+        print(warning)
+
+    for warning in unique_name_and_birth(individuals, tag_positions):
+        print(warning)
+
+    for warning in US_25(individuals, families, tag_positions):
+        print(warning)

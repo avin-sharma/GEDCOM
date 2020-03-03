@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def bigamy(individuals, families):
+def bigamy(individuals, families, tag_positions):
     """ 
     User Story 11
     Marriage should not occur during marriage to another spouse.
@@ -11,15 +11,18 @@ def bigamy(individuals, families):
     # Find of someone is married once
     # Then check if they dont have any other active marriage(married before today).
     # Ignore active marriages with dead(death before today) spouses.
+    
     for indi_id in individuals:
         individual = individuals[indi_id]
         count = 0
+
         for fam_id in individual.spouse:
             if is_married(individuals, families, fam_id):
                 count += 1
-        
+
         if count > 1:
-            warnings.append(f'{individual.name} has more than 1 active marriages!')
+            num = tag_positions[indi_id]['FAMS']
+            warnings.append(f'ANOMALY: INDIVIDUAL: US11, line {num}, {individual.name} has more than 1 active marriages!')
     
     return warnings
 
@@ -49,7 +52,7 @@ def is_alive(individuals, individual_id):
     """
     return individuals[individual_id].alive
 
-def first_cousins_married(individuals, families):
+def first_cousins_married(individuals, families, tag_positions):
     """
     User Story 19
     Searches and warns if first cousins are married
@@ -74,7 +77,8 @@ def first_cousins_married(individuals, families):
         w_parents_famc = get_parents_famc(individuals, families, family.wid)
 
         if h_parents_famc.intersection(w_parents_famc):
-            warnings.append(f'{husband.name} is married to his first cousin {wife.name}!')
+            num = tag_positions[fam_id]['HUSB'] | tag_positions[fam_id]['WIFE'] | tag_positions[family.hid]['FAMS'] | tag_positions[family.wid]['FAMS']
+            warnings.append(f'ANOMALY: FAMILY: US19, line {num} {husband.name} is married to his first cousin {wife.name}!')
     
     return warnings
         
@@ -102,6 +106,5 @@ def get_parents_famc(individuals, families, indi_id):
             parents_famc.update(father.child)
         if mother.child:
             parents_famc.update(mother.child)
-    
     
     return parents_famc
