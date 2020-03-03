@@ -2,6 +2,8 @@ import os
 
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
+from US_25 import US_25
+
 
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from US16_21 import check_correct_gender, check_last_names
@@ -71,8 +73,9 @@ def check_valid_input(line):
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
-    file_name = 'family.ged'
+    file_name = 'test.ged'
     file_path = os.path.join(current_directory, file_name)
+
     individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/output.txt')
 
     for warning in bigamy(individuals, families, tag_positions):
@@ -99,5 +102,9 @@ if __name__ == "__main__":
     # for warning in check_last_names(individuals, families):
     #     print(warning)
 
+
     # for warning in unique_name_and_birth(individuals):
     #     print(warning)
+
+   
+

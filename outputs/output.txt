@@ -1,4 +1,3 @@
-Individuals
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
 |   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |   Child   |      Spouse      |
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
@@ -44,3 +43,4 @@ Families
 
 ANOMALY: FAMILY: US11, line {56, 55}, Oscar Milano has more than 1 active marriages!
 ANOMALY: FAMILY: US19, line {232, 233, 83, 75} Joey Milano is married to his first cousin Isabella Milano!
+
