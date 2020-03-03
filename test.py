@@ -108,7 +108,7 @@ class TestGEDCOM(unittest.TestCase):
         file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
         individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
         
-        self.assertEqual(US_25(individuals, families, tag_positions),['ANOMALY: US25: line {15}, There are multiple Hp Pate in the family.',
+        self.assertEqual(US_25(individuals, families, tag_positions),['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.',
         'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
