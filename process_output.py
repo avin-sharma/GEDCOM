@@ -24,8 +24,8 @@ def save_information(inputs):
 
     individuals = {}
     families = {}
-
-    for level, tag, arguments in inputs:
+    tag_positions = {}
+    for num, level, tag, arguments in inputs:
         active_tags[level] = tag
         
         # Saving previous 0 level entity.
@@ -38,10 +38,13 @@ def save_information(inputs):
             
             # assign active entity new individual or family based on the tag
             active_entity = Individual(arguments) if tag == 'INDI' else Family(arguments)
+            # creating a new entity in tags dictionary so that we can add tags to it in the future
+            tag_positions[arguments] = {}
             continue
-    
+            
         if level == 0:
             continue
+        tag_positions[active_entity.id][tag] = num  
         
         # Since all the three fields are sets we add elements to them.
         if tag in ['FAMC', 'FAMS', 'CHIL']:
@@ -87,7 +90,7 @@ def save_information(inputs):
         if current.wid:
             current.wname = individuals[current.wid].name
 
-    
+    print(tag_positions)    
     return individuals, families
 
 def print_tables(data, type):

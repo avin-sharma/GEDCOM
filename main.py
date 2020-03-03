@@ -14,14 +14,14 @@ def parse_gedcom(path, output_path):
     valid_outputs = []
     try:
         with open(path) as fp, open(output_path, 'w') as out:
-            for line in fp:
+            for num, line in enumerate(fp,1):
                 line = line.strip()
                 # print('-->' + line)
                 # out.write('-->' + line + '\n')
 
                 level, tag, valid, arguments = check_valid_input(line)
                 if valid == 'Y':
-                    valid_outputs.append((level, tag, arguments))
+                    valid_outputs.append((num, level, tag, arguments))
 
                 # output = '<--{}|{}|{}|{}'.format(level, tag, valid, arguments)
                 # out.write(output + '\n')
