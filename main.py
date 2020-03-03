@@ -28,13 +28,13 @@ def parse_gedcom(path, output_path):
                 # print(output)
 
             # process the information and save it
-            individuals, families = save_information(valid_outputs)
+            individuals, families , tag_positions = save_information(valid_outputs)
             out.write('Individuals\n')
             out.write(str(print_tables(individuals, 'INDI')))
             out.write('\n\nFamilies\n')
             out.write(str(print_tables(families, 'FAM')))
 
-        return individuals, families
+        return individuals, families, tag_positions
 
     except FileNotFoundError:
         print('File not found')
@@ -71,31 +71,31 @@ if __name__ == "__main__":
     current_directory = os.getcwd()
     file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
-    # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
-    individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
-    for warning in bigamy(individuals, families):
+    individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/output.txt')
+
+    for warning in bigamy(individuals, families, tag_positions):
         print(warning)  # Oscar Milano
 
-    for warning in first_cousins_married(individuals, families):
+    for warning in first_cousins_married(individuals, families, tag_positions):
         print(warning)
     
-    for warning in check_BirthDate(individuals):
-        print(warning)
-    for warning in check_MarriageDate(families):
-        print(warning)
-    for warning in check_DivorceDate(families):
-        print(warning)
-    for warning in check_DeathDate(individuals):
-        print(warning)
-    for warning in check_BirthBeforeMarriage(individuals,families):
-        print(warning)
+    # for warning in check_BirthDate(individuals):
+    #     print(warning)
+    # for warning in check_MarriageDate(families):
+    #     print(warning)
+    # for warning in check_DivorceDate(families):
+    #     print(warning)
+    # for warning in check_DeathDate(individuals):
+    #     print(warning)
+    # for warning in check_BirthBeforeMarriage(individuals,families):
+    #     print(warning)
     
 
-    for warning in check_correct_gender(individuals, families):
-        print(warning)
+    # for warning in check_correct_gender(individuals, families):
+    #     print(warning)
 
-    for warning in check_last_names(individuals, families):
-        print(warning)
+    # for warning in check_last_names(individuals, families):
+    #     print(warning)
 
-    for warning in unique_name_and_birth(individuals):
-        print(warning)
+    # for warning in unique_name_and_birth(individuals):
+    #     print(warning)

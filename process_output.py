@@ -5,6 +5,7 @@ from datetime import datetime
 from prettytable import PrettyTable
 
 from helpers import check_and_convert_string_to_date, convert_date_to_string
+from collections import defaultdict
 
 def save_information(inputs):
     """
@@ -39,12 +40,12 @@ def save_information(inputs):
             # assign active entity new individual or family based on the tag
             active_entity = Individual(arguments) if tag == 'INDI' else Family(arguments)
             # creating a new entity in tags dictionary so that we can add tags to it in the future
-            tag_positions[arguments] = {}
+            tag_positions[arguments] = defaultdict(set)
             continue
             
         if level == 0:
             continue
-        tag_positions[active_entity.id][tag] = num  
+        tag_positions[active_entity.id][tag].add(num)
         
         # Since all the three fields are sets we add elements to them.
         if tag in ['FAMC', 'FAMS', 'CHIL']:
@@ -89,9 +90,8 @@ def save_information(inputs):
         
         if current.wid:
             current.wname = individuals[current.wid].name
-
-    print(tag_positions)    
-    return individuals, families
+    
+    return individuals, families, tag_positions
 
 def print_tables(data, type):
     table = PrettyTable()
