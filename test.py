@@ -104,15 +104,14 @@ class TestGEDCOM(unittest.TestCase):
 
 
     def test_US_25(self):
-        file_name = 'test.ged'
+        file_name = 'US_25.ged'
         file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
-        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
-        self.assertEqual(US_25(individuals, families),['Hp Pate','Jan 02 1970'])
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        
+        self.assertEqual(US_25(individuals, families, tag_positions),['ANOMALY: US25: line {15}, There are multiple Hp Pate in the family.',
+        'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
-        file_name = 'test.ged'
-        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
-        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
         self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"),None)
         self.assertEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
         self.assertNotEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 19, 0, 0))
