@@ -73,7 +73,7 @@ def check_valid_input(line):
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
-    file_name = 'test.ged'
+    file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
 
     individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/output.txt')
@@ -106,5 +106,7 @@ if __name__ == "__main__":
     # for warning in unique_name_and_birth(individuals):
     #     print(warning)
 
+    for warning in US_25(individuals, families, tag_positions):
+        print(warning)
    
-
+    
