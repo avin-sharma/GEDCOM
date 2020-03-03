@@ -118,11 +118,11 @@ class TestGEDCOM(unittest.TestCase):
                                                                        'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
-        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"), None)
+        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970", 0), None)
         self.assertEqual(check_and_convert_string_to_date(
-            "20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
+            "20 Jan 1970", 0), datetime(1970, 1, 20, 0, 0))
         self.assertNotEqual(check_and_convert_string_to_date(
-            "20 Jan 1970"), datetime(1970, 1, 19, 0, 0))
+            "20 Jan 1970", 0), datetime(1970, 1, 19, 0, 0))
 
 
 if __name__ == "__main__":
