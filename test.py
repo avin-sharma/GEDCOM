@@ -6,6 +6,7 @@ from family import Family
 from individual import Individual
 from marriage_checkers import is_alive, bigamy, first_cousins_married
 from US16_21 import check_correct_gender, check_last_names
+from name_birth import unique_name_and_birth
 
 current_directory = os.getcwd()
 # file_name = 'proj02test.ged'
@@ -67,6 +68,13 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_correct_gender(individuals, families), [
                          'Noah Millow has different gender than expected', 'Amit Millow has different gender than expected'])
+
+    def test_US_23(self):
+        file_name = 'US_23.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(unique_name_and_birth(individuals),['Hp Pate has similar name and birthdate.','1970-01-02 00:00:00 has more than 1 name.'])
+
 
 
 if __name__ == "__main__":
