@@ -65,28 +65,6 @@ if __name__ == "__main__":
     current_directory = os.getcwd()
     file_name = 'test.ged'
     file_path = os.path.join(current_directory, file_name)
-    x1 = []
-    fp = open(file_path, "r")
-    for line in fp:
-        x1.append(line)
-        #print(line)
-    #print("____________________________________________________")
-    fw = open("ged1105.ged", "w")
-    aa: int = len(x1)
-    counter = 0
-    for i in range(aa):
-        counter = counter + 1
-        #print("a")
-        fw.write(str(counter) + " " + x1[i])
-
-
-    #current_directory = os.getcwd()
-    #file_name="ged1105.ged"
-    #file_path = os.path.join(current_directory, file_name)
-    #print("q")
-    #fo = open(file_name)
-    #for li in fo:
-        #print(li)
     individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
     for warnings in US_25(individuals, families) :
-        print(warnings)
+        print(f"This name and birthday of child {warnings} have duplicate values")

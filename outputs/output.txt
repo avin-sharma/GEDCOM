@@ -3,7 +3,7 @@ Individuals
 |  ID  |   Name  | Gender |   Birthday  | Age | Alive | Death |  Child   |      Spouse      |
 +------+---------+--------+-------------+-----+-------+-------+----------+------------------+
 | @I1@ | Hp Pate |   F    | Jan 02 1970 |  50 |  True |   NA  | {'@F1@'} |        NA        |
-| @I2@ | Sa Pate |   M    | Apr 04 1954 |  65 |  True |   NA  |    NA    | {'@F2@', '@F1@'} |
+| @I2@ | Sa Pate |   M    | Apr 04 1954 |  65 |  True |   NA  |    NA    | {'@F1@', '@F2@'} |
 | @I3@ | PP Shah |   F    | Mar 06 1955 |  65 |  True |   NA  |    NA    |     {'@F1@'}     |
 | @I4@ | Lm Pate |   F    | May 11 1955 |  64 |  True |   NA  |    NA    | {'@F3@', '@F2@'} |
 | @I5@ | Sa Pate |   M    |      NA     |  NA |  True |   NA  |    NA    |     {'@F3@'}     |
