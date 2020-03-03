@@ -3,7 +3,7 @@ import os
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
 from US_25 import US_25
-from US_42 import check_and_convert_string_to_date,convert_date_to_string
+
 
 def parse_gedcom(path, output_path):
     """Parses the file"""

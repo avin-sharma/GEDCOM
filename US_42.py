@@ -12,6 +12,3 @@ def check_and_convert_string_to_date(string):
     except ValueError:
         #print("Invalid date provided.")
         return None
-
-def convert_date_to_string(date):
-    return date.strftime('%b %d %Y')
