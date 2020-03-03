@@ -88,4 +88,5 @@ if __name__ == "__main__":
     #for li in fo:
         #print(li)
     individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
-    US_25(individuals, families)
+    for warnings in US_25(individuals, families) :
+        print(warnings)

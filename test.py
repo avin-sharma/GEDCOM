@@ -1,10 +1,13 @@
 import os
 import unittest
+from datetime import datetime
 
 from main import parse_gedcom
 from family import Family
 from individual import Individual
 from marriage_checkers import is_alive, bigamy, first_cousins_married
+from US_25 import US_25
+from US_42 import check_and_convert_string_to_date,convert_date_to_string
 
 current_directory = os.getcwd()
 # file_name = 'proj02test.ged'
@@ -41,6 +44,22 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
 
         self.assertEqual(first_cousins_married(individuals, families), ['Cousin 2 is married to his first cousin Cousin 1!'])
+
+    def test_US_25(self):
+        file_name = 'test.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_25(individuals, families),['Hp Pate','Jan 02 1970'])
+
+    def test_US_42(self):
+        file_name = 'test.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"),None)
+        self.assertEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
+        self.assertEqual(convert_date_to_string(datetime(1970, 1, 20, 0, 0)),"Jan 20 1970")
+        self.assertNotEqual(convert_date_to_string(datetime(1970, 1, 20, 0, 0)), "Jan 21 1970")
+
 
 
 if __name__ == "__main__":

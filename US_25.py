@@ -1,28 +1,18 @@
-from collections import Counter
-def US_25(individuals,families):
-    #warning=set()
-    f={}
-    a={}
-    b={}
-    z={}
-    counter=0
+from US_42 import convert_date_to_string
+def US_25(individuals, families):
+    warnings=[]
     for family in families.values():
-        a=family.id
-        if a == family.id:
-            a=family.children
-            #print(a)
-            for indi_id in individuals:
-                individual=individuals[indi_id]
-                f={indi_id}
-                z={family.id}
-                if f & a ==f:
-                    if z == individual.child:
-                        print(individual.name)
-                        print(individual.birth)
-                        if individual.name and individual.birth:
-                            counter+=1
-                            if counter>1:
-                                print("Same name and birthdate occured")
-                    #if individual.child & a ==individual.child:
-                     #   print(individual.name)
-                      #  print(individual.birth)
+        names = set()
+        birth_dates = set()
+
+        for child_id in family.children:
+            child = individuals[child_id]
+            if child.name in names:
+                warnings.append(child.name)
+                # Do something here
+            if child.birth in birth_dates:
+                child.birth=convert_date_to_string(child.birth)
+                warnings.append(child.birth)
+            birth_dates.add(child.birth)
+            names.add(child.name)
+    return warnings
