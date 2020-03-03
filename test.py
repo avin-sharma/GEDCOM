@@ -1,14 +1,20 @@
 import os
 import unittest
+from datetime import datetime
 
 from main import parse_gedcom
 from family import Family
 from individual import Individual
 from marriage_checkers import is_alive, bigamy, first_cousins_married
+
+from US_25 import US_25
+from US_42 import check_and_convert_string_to_date
+
 from US16_21 import check_correct_gender, check_last_names
 
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from name_birth import unique_name_and_birth
+
 
 current_directory = os.getcwd()
 # file_name = 'proj02test.ged'
@@ -96,6 +102,20 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
         self.assertEqual(unique_name_and_birth(individuals),['Hp Pate has similar name and birthdate.','1970-01-02 00:00:00 has more than 1 name.'])
 
+
+    def test_US_25(self):
+        file_name = 'test.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_25(individuals, families),['Hp Pate','Jan 02 1970'])
+
+    def test_US_42(self):
+        file_name = 'test.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"),None)
+        self.assertEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
+        self.assertNotEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 19, 0, 0))
 
 
 if __name__ == "__main__":
