@@ -2,6 +2,8 @@ import os
 
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married
+from US_25 import US_25
+from US_42 import check_and_convert_string_to_date,convert_date_to_string
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -61,12 +63,29 @@ def check_valid_input(line):
 
 if __name__ == "__main__":
     current_directory = os.getcwd()
-    file_name = 'family.ged'
+    file_name = 'test.ged'
     file_path = os.path.join(current_directory, file_name)
-    # parse_gedcom('/Users/avinsharma/Work/SSW555/Project02/Imaginary-Family.ged', 'output.txt')
-    individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
-    for warning in bigamy(individuals, families):
-        print(warning) # Oscar Milano
+    x1 = []
+    fp = open(file_path, "r")
+    for line in fp:
+        x1.append(line)
+        #print(line)
+    #print("____________________________________________________")
+    fw = open("ged1105.ged", "w")
+    aa: int = len(x1)
+    counter = 0
+    for i in range(aa):
+        counter = counter + 1
+        #print("a")
+        fw.write(str(counter) + " " + x1[i])
 
-    for warning in first_cousins_married(individuals, families):
-        print(warning)
+
+    #current_directory = os.getcwd()
+    #file_name="ged1105.ged"
+    #file_path = os.path.join(current_directory, file_name)
+    #print("q")
+    #fo = open(file_name)
+    #for li in fo:
+        #print(li)
+    individuals, families = parse_gedcom(file_path, 'outputs/output.txt')
+    US_25(individuals, families)
