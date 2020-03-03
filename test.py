@@ -59,23 +59,23 @@ class TestGEDCOM(unittest.TestCase):
         self.assertEqual(first_cousins_married(individuals, families, tag_positions), [
                          'ANOMALY: FAMILY: US19, line {56, 50, 75, 76} Cousin 2 is married to his first cousin Cousin 1!'])
 
-    # def test_US_16(self):
-    #     file_name = 'US_16.ged'
-    #     file_path = os.path.join(
-    #         current_directory, 'gedcom_test_files', file_name)
-    #     individuals, families = parse_gedcom(
-    #         file_path, 'outputs/test_output.txt')
-    #     self.assertEqual(check_last_names(individuals, families), [
-    #                      'Amit Shah last name is diffrent than Noah Millow last name'])
+    def test_US_16(self):
+        file_name = 'US_16.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_last_names(individuals, families, tag_positions), [
+            'ANOMALY: INDIVIDUAL: US16, line {29, 15}, Amit Shah last name is diffrent than Noah Millow last name'])
 
-    # def test_US_21(self):
-    #     file_name = 'US_21.ged'
-    #     file_path = os.path.join(
-    #         current_directory, 'gedcom_test_files', file_name)
-    #     individuals, families = parse_gedcom(
-    #         file_path, 'outputs/test_output.txt')
-    #     self.assertEqual(check_correct_gender(individuals, families), [
-    #                      'Noah Millow has different gender than expected', 'Amit Millow has different gender than expected'])
+    def test_US_21(self):
+        file_name = 'US_21.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_correct_gender(individuals, families, tag_positions), [
+                         'ANOMALY: INDIVIDUAL: US21, line {19}, Noah Millow has different gender than expected', 'ANOMALY: INDIVIDUAL: US21, line {33}, Amit Millow has different gender than expected'])
 
     def test_US_01(self):
         file_name = 'US_01,US_02.ged'
@@ -83,38 +83,46 @@ class TestGEDCOM(unittest.TestCase):
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-        self.assertEqual(check_BirthDate(individuals, tag_positions),['ANOMALY: FAMILY: US01, line {60},Shalini Shah is born after current date'])
-        self.assertEqual(check_MarriageDate(families, tag_positions),['ANOMALY: FAMILY: US01, line {79},Samir Shah and Shalini Shah are married after current date'])
-        self.assertEqual(check_DivorceDate(families, tag_positions),['ANOMALY: FAMILY: US01, line {69},Jesal Shah and Sandhya Jain are divorced after current date'])
-        self.assertEqual(check_DeathDate(individuals, tag_positions),['ANOMALY: FAMILY: US01, line {51},Raj Jain died after current date'])
-    
+        self.assertEqual(check_BirthDate(individuals, tag_positions), [
+                         'ANOMALY: FAMILY: US01, line {60},Shalini Shah is born after current date'])
+        self.assertEqual(check_MarriageDate(families, tag_positions), [
+                         'ANOMALY: FAMILY: US01, line {79},Samir Shah and Shalini Shah are married after current date'])
+        self.assertEqual(check_DivorceDate(families, tag_positions), [
+                         'ANOMALY: FAMILY: US01, line {69},Jesal Shah and Sandhya Jain are divorced after current date'])
+        self.assertEqual(check_DeathDate(individuals, tag_positions), [
+                         'ANOMALY: FAMILY: US01, line {51},Raj Jain died after current date'])
+
     def test_US_02(self):
         file_name = 'US_01,US_02.ged'
         file_path = os.path.join(
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-        self.assertEqual(check_BirthBeforeMarriage(individuals,families, tag_positions),['ANOMALY: FAMILY: US02, line {60, 79},Shalini Shah Married before birth'])
-        
+        self.assertEqual(check_BirthBeforeMarriage(individuals, families, tag_positions), [
+                         'ANOMALY: FAMILY: US02, line {60, 79},Shalini Shah Married before birth'])
+
     # def test_US_23(self):
     #     file_name = 'US_23.ged'
     #     file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
     #     individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
     #     self.assertEqual(unique_name_and_birth(individuals),['Hp Pate has similar name and birthdate.','1970-01-02 00:00:00 has more than 1 name.'])
 
-
     def test_US_25(self):
         file_name = 'US_25.ged'
-        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
-        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
-        
-        self.assertEqual(US_25(individuals, families, tag_positions),['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.',
-        'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+
+        self.assertEqual(US_25(individuals, families, tag_positions), ['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.',
+                                                                       'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
-        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"),None)
-        self.assertEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
-        self.assertNotEqual(check_and_convert_string_to_date("20 Jan 1970"), datetime(1970, 1, 19, 0, 0))
+        self.assertEqual(check_and_convert_string_to_date("30 Feb 1970"), None)
+        self.assertEqual(check_and_convert_string_to_date(
+            "20 Jan 1970"), datetime(1970, 1, 20, 0, 0))
+        self.assertNotEqual(check_and_convert_string_to_date(
+            "20 Jan 1970"), datetime(1970, 1, 19, 0, 0))
 
 
 if __name__ == "__main__":

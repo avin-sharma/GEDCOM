@@ -16,7 +16,7 @@ def parse_gedcom(path, output_path):
     valid_outputs = []
     try:
         with open(path) as fp:
-            for num, line in enumerate(fp,1):
+            for num, line in enumerate(fp, 1):
                 line = line.strip()
                 # print('-->' + line)
                 # out.write('-->' + line + '\n')
@@ -30,7 +30,8 @@ def parse_gedcom(path, output_path):
                 # print(output)
 
             # process the information and save it
-            individuals, families , tag_positions = save_information(valid_outputs)
+            individuals, families, tag_positions = save_information(
+                valid_outputs)
             print('Individuals')
             print(str(print_tables(individuals, 'INDI')))
 
@@ -76,14 +77,15 @@ if __name__ == "__main__":
     file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
 
-    individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/output.txt')
+    individuals, families, tag_positions = parse_gedcom(
+        file_path, 'outputs/output.txt')
 
     for warning in bigamy(individuals, families, tag_positions):
         print(warning)  # Oscar Milano
 
     for warning in first_cousins_married(individuals, families, tag_positions):
         print(warning)
-    
+
     for warning in check_BirthDate(individuals, tag_positions):
         print(warning)
     for warning in check_MarriageDate(families, tag_positions):
@@ -92,21 +94,17 @@ if __name__ == "__main__":
         print(warning)
     for warning in check_DeathDate(individuals, tag_positions):
         print(warning)
-    for warning in check_BirthBeforeMarriage(individuals,families, tag_positions):
+    for warning in check_BirthBeforeMarriage(individuals, families, tag_positions):
         print(warning)
-    
 
-    # for warning in check_correct_gender(individuals, families):
-    #     print(warning)
+    for warning in check_correct_gender(individuals, families, tag_positions):
+        print(warning)
 
-    # for warning in check_last_names(individuals, families):
-    #     print(warning)
-
+    for warning in check_last_names(individuals, families, tag_positions):
+        print(warning)
 
     # for warning in unique_name_and_birth(individuals):
     #     print(warning)
 
     for warning in US_25(individuals, families, tag_positions):
         print(warning)
-   
-    
