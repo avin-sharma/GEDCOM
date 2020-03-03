@@ -16,6 +16,6 @@ class Family:
             'HUSB' : 'hid',
             'WIFE': 'wid',
             'CHIL': self.children,
-            'DIV': 'divorce'
+            'DIV': 'divorced'
         }
         
