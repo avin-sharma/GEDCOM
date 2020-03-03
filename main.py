@@ -81,16 +81,16 @@ if __name__ == "__main__":
     for warning in first_cousins_married(individuals, families, tag_positions):
         print(warning)
     
-    # for warning in check_BirthDate(individuals):
-    #     print(warning)
-    # for warning in check_MarriageDate(families):
-    #     print(warning)
-    # for warning in check_DivorceDate(families):
-    #     print(warning)
-    # for warning in check_DeathDate(individuals):
-    #     print(warning)
-    # for warning in check_BirthBeforeMarriage(individuals,families):
-    #     print(warning)
+    for warning in check_BirthDate(individuals, tag_positions):
+        print(warning)
+    for warning in check_MarriageDate(families, tag_positions):
+        print(warning)
+    for warning in check_DivorceDate(families, tag_positions):
+        print(warning)
+    for warning in check_DeathDate(individuals, tag_positions):
+        print(warning)
+    for warning in check_BirthBeforeMarriage(individuals,families, tag_positions):
+        print(warning)
     
 
     # for warning in check_correct_gender(individuals, families):
