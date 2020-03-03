@@ -13,7 +13,7 @@ def parse_gedcom(path, output_path):
     """Parses the file"""
     valid_outputs = []
     try:
-        with open(path) as fp, open(output_path, 'w') as out:
+        with open(path) as fp:
             for num, line in enumerate(fp,1):
                 line = line.strip()
                 # print('-->' + line)
@@ -29,10 +29,12 @@ def parse_gedcom(path, output_path):
 
             # process the information and save it
             individuals, families , tag_positions = save_information(valid_outputs)
-            out.write('Individuals\n')
-            out.write(str(print_tables(individuals, 'INDI')))
-            out.write('\n\nFamilies\n')
-            out.write(str(print_tables(families, 'FAM')))
+            print('Individuals')
+            print(str(print_tables(individuals, 'INDI')))
+
+            print('\nFamilies')
+            print(str(print_tables(families, 'FAM')))
+            print()
 
         return individuals, families, tag_positions
 
