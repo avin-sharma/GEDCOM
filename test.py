@@ -6,6 +6,8 @@ from family import Family
 from individual import Individual
 from marriage_checkers import is_alive, bigamy, first_cousins_married
 from US16_21 import check_correct_gender, check_last_names
+
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from name_birth import unique_name_and_birth
 
 current_directory = os.getcwd()
@@ -69,6 +71,25 @@ class TestGEDCOM(unittest.TestCase):
         self.assertEqual(check_correct_gender(individuals, families), [
                          'Noah Millow has different gender than expected', 'Amit Millow has different gender than expected'])
 
+    def test_US_01(self):
+        file_name = 'US_01,US_02.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthDate(individuals),['Shalini Shah is born after current date'])
+        self.assertEqual(check_MarriageDate(families),['Samir Shah and Shalini Shah are married after current date'])
+        self.assertEqual(check_DivorceDate(families),['Jesal Shah and Sandhya Jain are divorced after current date'])
+        self.assertEqual(check_DeathDate(individuals),['Raj Jain died after current date'])
+    
+    def test_US_02(self):
+        file_name = 'US_01,US_02.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthBeforeMarriage(individuals,families),['Shalini Shah Married before birth'])
+        
     def test_US_23(self):
         file_name = 'US_23.ged'
         file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
