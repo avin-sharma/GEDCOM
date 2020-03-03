@@ -103,8 +103,8 @@ if __name__ == "__main__":
     for warning in check_last_names(individuals, families, tag_positions):
         print(warning)
 
-    # for warning in unique_name_and_birth(individuals):
-    #     print(warning)
+    for warning in unique_name_and_birth(individuals, tag_positions):
+        print(warning)
 
     for warning in US_25(individuals, families, tag_positions):
         print(warning)

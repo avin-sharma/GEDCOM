@@ -22,7 +22,7 @@ def bigamy(individuals, families, tag_positions):
 
         if count > 1:
             num = tag_positions[indi_id]['FAMS']
-            warnings.append(f'ANOMALY: FAMILY: US11, line {num}, {individual.name} has more than 1 active marriages!')
+            warnings.append(f'ANOMALY: INDIVIDUAL: US11, line {num}, {individual.name} has more than 1 active marriages!')
     
     return warnings
 

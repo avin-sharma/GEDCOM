@@ -47,7 +47,7 @@ class TestGEDCOM(unittest.TestCase):
         # Arya and Noah ferris have both been married twice. Arya's partner passed
         # away so she is fine(in a monogamous marriage)! Noah should not be(bigamy).
         self.assertEqual(bigamy(individuals, families, tag_positions), [
-                         'ANOMALY: FAMILY: US11, line {22, 23}, Noah Ferris has more than 1 active marriages!'])
+                         'ANOMALY: INDIVIDUAL: US11, line {22, 23}, Noah Ferris has more than 1 active marriages!'])
 
     def test_US_19(self):
         file_name = 'US_19.ged'
@@ -101,11 +101,11 @@ class TestGEDCOM(unittest.TestCase):
         self.assertEqual(check_BirthBeforeMarriage(individuals, families, tag_positions), [
                          'ANOMALY: FAMILY: US02, line {60, 79},Shalini Shah Married before birth'])
 
-    # def test_US_23(self):
-    #     file_name = 'US_23.ged'
-    #     file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
-    #     individuals, families = parse_gedcom(file_path, 'outputs/test_output.txt')
-    #     self.assertEqual(unique_name_and_birth(individuals),['Hp Pate has similar name and birthdate.','1970-01-02 00:00:00 has more than 1 name.'])
+    def test_US_23(self):
+        file_name = 'US_23.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files',file_name)
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(unique_name_and_birth(individuals, tag_positions),['ANOMALY: INDIVIDUAL: US23, line {53, 15}, Hp Pate has similar name and birthdate.'])
 
     def test_US_25(self):
         file_name = 'US_25.ged'

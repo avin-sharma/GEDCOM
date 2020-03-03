@@ -54,7 +54,7 @@ def save_information(inputs):
             # If we have a date tag convert argument to datetime
             if level == 2:
                 tag = active_tags[1]
-                arguments = check_and_convert_string_to_date(arguments)
+                arguments = check_and_convert_string_to_date(arguments, num)
 
             setattr(active_entity, active_entity.map[tag], arguments)
     
