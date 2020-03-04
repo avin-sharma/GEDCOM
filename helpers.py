@@ -12,7 +12,7 @@ def check_and_convert_string_to_date(string, line_num):
     try:
         return datetime.strptime(string, '%d %b %Y')
     except ValueError:
-        print(f'ERROR: US42, line {line_num}, Illegitimate date!')
+        print(f'ERROR: US42, line {line_num}, Illegitimate date: {string}!')
         return None
 
 def convert_date_to_string(date):

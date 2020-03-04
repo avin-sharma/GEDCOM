@@ -1,7 +1,7 @@
 import os
 
 from process_output import save_information, print_tables
-from marriage_checkers import bigamy, first_cousins_married
+from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts
 from US_25 import US_25
 
 
@@ -107,4 +107,10 @@ if __name__ == "__main__":
         print(warning)
 
     for warning in US_25(individuals, families, tag_positions):
+        print(warning)
+
+    # Sprint 2
+
+    # User Story 15
+    for warning in check_sibling_counts(individuals, families, tag_positions):
         print(warning)

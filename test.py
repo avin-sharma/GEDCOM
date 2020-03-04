@@ -5,7 +5,7 @@ from datetime import datetime
 from main import parse_gedcom
 from family import Family
 from individual import Individual
-from marriage_checkers import is_alive, bigamy, first_cousins_married
+from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sibling_counts
 
 from US_25 import US_25
 from US_42 import check_and_convert_string_to_date
@@ -123,6 +123,23 @@ class TestGEDCOM(unittest.TestCase):
             "20 Jan 1970", 0), datetime(1970, 1, 20, 0, 0))
         self.assertNotEqual(check_and_convert_string_to_date(
             "20 Jan 1970", 0), datetime(1970, 1, 19, 0, 0))
+    
+    # Sprint 2
+    def test_US_15(self):
+        file_name = 'US_15_False.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        
+        file_name = 'US_15_True.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals2, families2, tag_positions2 = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        
+        self.assertEqual(check_sibling_counts(individuals, families, tag_positions), [])
+        self.assertEqual(check_sibling_counts(individuals2, families2, tag_positions2), ['ANOMALY: FAMILY: US15, line [27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75, 79, 83, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101] Family @F1@ has more than 14 siblings!'])
 
 
 if __name__ == "__main__":

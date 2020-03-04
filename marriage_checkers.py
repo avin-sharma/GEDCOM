@@ -16,9 +16,10 @@ def bigamy(individuals, families, tag_positions):
         individual = individuals[indi_id]
         count = 0
 
-        for fam_id in individual.spouse:
-            if is_married(individuals, families, fam_id):
-                count += 1
+        if individual.spouse:
+            for fam_id in individual.spouse:
+                if is_married(individuals, families, fam_id):
+                    count += 1
 
         if count > 1:
             num = tag_positions[indi_id]['FAMS']
@@ -40,6 +41,9 @@ def is_married(individuals, families, family_id):
     if divorce_date and divorce_date < datetime.now():
         return False
     
+    if not family.hid or not family.wid:
+        return False
+    
     # if one of the partners has passed away, they are not married.
     if not is_alive(individuals, family.hid) or not is_alive(individuals, family.wid):
         return False
@@ -55,6 +59,7 @@ def is_alive(individuals, individual_id):
 def first_cousins_married(individuals, families, tag_positions):
     """
     User Story 19
+
     Searches and warns if first cousins are married
     in the given families and individuals.
 
@@ -72,11 +77,14 @@ def first_cousins_married(individuals, families, tag_positions):
         husband = individuals[family.hid]
         wife = individuals[family.wid]
 
-        # add grand_parents to the variable
+        h_parents = get_parents(individuals, families, family.hid)
+        w_parents = get_parents(individuals, families, family.wid)
+
+        # add parents family where they are child to the variable
         h_parents_famc = get_parents_famc(individuals, families, family.hid)
         w_parents_famc = get_parents_famc(individuals, families, family.wid)
 
-        if h_parents_famc.intersection(w_parents_famc):
+        if h_parents_famc.intersection(w_parents_famc) and not h_parents.intersection(w_parents):
             num = tag_positions[fam_id]['HUSB'] | tag_positions[fam_id]['WIFE'] | tag_positions[family.hid]['FAMS'] | tag_positions[family.wid]['FAMS']
             warnings.append(f'ANOMALY: FAMILY: US19, line {num} {husband.name} is married to his first cousin {wife.name}!')
     
@@ -85,7 +93,7 @@ def first_cousins_married(individuals, families, tag_positions):
 
 def get_parents_famc(individuals, families, indi_id):
     """
-    Find grand parents of the given person.
+    Find family id of both the parents of the given person.
     """
     if not indi_id:
         return set()
@@ -108,3 +116,48 @@ def get_parents_famc(individuals, families, indi_id):
             parents_famc.update(mother.child)
     
     return parents_famc
+
+def get_parents(individuals, families, indi_id):
+    """
+    Find parents of the given person.
+    """
+    if not indi_id:
+        return set()
+        
+    individual = individuals[indi_id]
+    parents = set()
+    
+    if not individual.child:
+        return set()
+    
+    for famc in individual.child:
+        family = families[famc]
+        father = individuals[family.hid]
+        mother = individuals[family.wid]
+
+        if father:
+            parents.add(father)
+        if mother:
+            parents.add(mother)
+    
+    return parents
+
+def check_sibling_counts(individuals, families, tag_positions):
+    """
+    User Story 15
+
+    There should be fewer than 15 siblings in a family.
+
+    returns: a list of warning strings.
+    """
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+
+        if family.children and len(family.children) >= 15:
+            num = tag_positions[fam_id]['CHIL']
+            for child_id in family.children:
+                num.update(tag_positions[child_id]['FAMC'])
+            warnings.append(f'ANOMALY: FAMILY: US15, line {sorted(num)} Family {fam_id} has more than 14 siblings!')
+    
+    return warnings
