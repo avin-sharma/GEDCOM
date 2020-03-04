@@ -78,6 +78,7 @@ def save_information(inputs):
                 if deathday > datetime.now():
                     deathday =  datetime.now()
             else:
+                current.alive = True
                 deathday =  datetime.now()
             difference = deathday - birthday
             current.age = (difference.days + difference.seconds//86400)//365
