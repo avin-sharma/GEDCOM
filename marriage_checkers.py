@@ -107,12 +107,13 @@ def get_parents_famc(individuals, families, indi_id):
     
     for famc in individual.child:
         family = families[famc]
-        father = individuals[family.hid]
-        mother = individuals[family.wid]
 
-        if father.child:
+        if family.hid and individuals[family.hid].child:
+            father = individuals[family.hid]
             parents_famc.update(father.child)
-        if mother.child:
+
+        if family.wid and individuals[family.wid].child:
+            mother = individuals[family.wid]
             parents_famc.update(mother.child)
     
     return parents_famc
@@ -132,13 +133,11 @@ def get_parents(individuals, families, indi_id):
     
     for famc in individual.child:
         family = families[famc]
-        father = individuals[family.hid]
-        mother = individuals[family.wid]
 
-        if father:
-            parents.add(father)
-        if mother:
-            parents.add(mother)
+        if family.hid:
+            parents.add(family.hid)
+        if family.wid:
+            parents.add(family.wid)
     
     return parents
 
@@ -159,5 +158,36 @@ def check_sibling_counts(individuals, families, tag_positions):
             for child_id in family.children:
                 num.update(tag_positions[child_id]['FAMC'])
             warnings.append(f'ANOMALY: FAMILY: US15, line {sorted(num)} Family {fam_id} has more than 14 siblings!')
+    
+    return warnings
+
+
+def check_marriage_aunts_uncles(individuals, families, tag_positions):
+    """
+    User Story 20
+
+    Aunts and uncles should not marry their nieces or nephews.
+
+    returns: a list of warning strings.
+    """
+    warnings = []
+    
+    for indi_id in individuals:
+        individual = individuals[indi_id]
+
+        if not individual.spouse:
+            continue
+            
+        parents = get_parents(individuals, families, indi_id)
+        aunts_uncles = set()
+
+        for fam_id in get_parents_famc(individuals, families, indi_id):
+            aunts_uncles.update(families[fam_id].children)
+        aunts_uncles = aunts_uncles - parents
+
+        for person_id in aunts_uncles:
+            if (individuals[person_id].spouse).intersection(individual.spouse):
+                num = tag_positions[indi_id]['FAMS']
+                warnings.append(f'ANOMALY: FAMILY: US20, line{num} {individual.name} married to their uncle or aunt.')
     
     return warnings
