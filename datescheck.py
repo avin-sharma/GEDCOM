@@ -10,7 +10,7 @@ def check_BirthDate(individuals, tag_positions):
         if individual.birth != None:
             if individual.birth > currentDate: 
                 num = tag_positions[indi_id]['BIRT']
-                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{individual.name} is born after current date')
+                warnings.append(f'ANOMALY: INDIVIDUAL: US01, line {num},{individual.name} is born after current date')
     return warnings
 
 def check_MarriageDate(families, tag_positions):
@@ -43,7 +43,7 @@ def check_DeathDate(individuals, tag_positions):
         if individual.death:
             if individual.death > currentDate:
                 num = tag_positions[indi_id]['DEAT']
-                warnings.append(f'ANOMALY: FAMILY: US01, line {num},{individual.name} died after current date')
+                warnings.append(f'ANOMALY: INDIVIDUAL: US01, line {num},{individual.name} died after current date')
     return warnings
 
 def check_BirthBeforeMarriage(individuals,families, tag_positions):
