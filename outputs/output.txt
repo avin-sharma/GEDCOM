@@ -45,10 +45,10 @@ Families
 
 ANOMALY: INDIVIDUAL: US11, line {56, 55}, Oscar Milano has more than 1 active marriages!
 ANOMALY: FAMILY: US19, line {83, 75, 260, 261} Joey Milano is married to his first cousin Isabella Milano!
-ANOMALY: FAMILY: US01, line {147},Sofia Milano is born after current date
+ANOMALY: INDIVIDUAL: US01, line {147},Sofia Milano is born after current date
 ANOMALY: FAMILY: US01, line {232},Oscar Milano and Emma Broadway are married after current date
 ANOMALY: FAMILY: US01, line {241},Oscar Milano and Joan Watson are divorced after current date
-ANOMALY: FAMILY: US01, line {102},Maria Ferrari died after current date
+ANOMALY: INDIVIDUAL: US01, line {102},Maria Ferrari died after current date
 ANOMALY: FAMILY: US02, line {256, 91},Roberto Milano Married before birth
 ANOMALY: INDIVIDUAL: US21, line {165}, Meet Smith has different gender than expected
 ANOMALY: INDIVIDUAL: US21, line {195}, Evita Smith has different gender than expected

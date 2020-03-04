@@ -84,13 +84,13 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_BirthDate(individuals, tag_positions), [
-                         'ANOMALY: FAMILY: US01, line {60},Shalini Shah is born after current date'])
+                         'ANOMALY: INDIVIDUAL: US01, line {147},Sofia Milano is born after current date'])
         self.assertEqual(check_MarriageDate(families, tag_positions), [
-                         'ANOMALY: FAMILY: US01, line {79},Samir Shah and Shalini Shah are married after current date'])
+                         'ANOMALY: FAMILY: US01, line {232},Oscar Milano and Emma Broadway are married after current date'])
         self.assertEqual(check_DivorceDate(families, tag_positions), [
-                         'ANOMALY: FAMILY: US01, line {69},Jesal Shah and Sandhya Jain are divorced after current date'])
+                         'ANOMALY: FAMILY: US01, line {241},Oscar Milano and Joan Watson are divorced after current date'])
         self.assertEqual(check_DeathDate(individuals, tag_positions), [
-                         'ANOMALY: FAMILY: US01, line {51},Raj Jain died after current date'])
+                         'ANOMALY: INDIVIDUAL: US01, line {102},Maria Ferrari died after current date'])
 
     def test_US_02(self):
         file_name = 'US_01,US_02.ged'
@@ -99,7 +99,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_BirthBeforeMarriage(individuals, families, tag_positions), [
-                         'ANOMALY: FAMILY: US02, line {60, 79},Shalini Shah Married before birth'])
+                         'ANOMALY: FAMILY: US02, line {256, 91},Roberto Milano Married before birth'])
 
     def test_US_23(self):
         file_name = 'US_23.ged'
