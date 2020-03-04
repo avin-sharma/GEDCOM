@@ -46,6 +46,9 @@ def save_information(inputs):
         if level == 0:
             continue
         tag_positions[active_entity.id][tag].add(num)
+
+        if tag in ['DEAT', 'BIRT', 'MARR', 'DIV']:
+            continue
         
         # Since all the three fields are sets we add elements to them.
         if tag in ['FAMC', 'FAMS', 'CHIL']:
