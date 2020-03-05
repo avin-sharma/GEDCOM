@@ -5,7 +5,7 @@ from datetime import datetime
 from main import parse_gedcom
 from family import Family
 from individual import Individual
-from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles
+from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce
 
 from US_25 import US_25
 from US_42 import check_and_convert_string_to_date
@@ -149,6 +149,12 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
 
         self.assertEqual(check_marriage_aunts_uncles(individuals, families, tag_positions), ['ANOMALY: FAMILY: US20, line{30} Daughter married to their uncle or aunt.','ANOMALY: FAMILY: US20, line{36} Son married to their uncle or aunt.'])
+
+    def test_US_04(self):
+        family = Family(1)
+        family.divorced = check_and_convert_string_to_date("05 JAN 2005", 0)
+        family.married = check_and_convert_string_to_date("10 JAN 2005", 0)
+        self.assertEqual(marriage_before_divorce({}, {1: family}, {1:{'DIV': {1}, 'MARR': {2}}}), ['ANOMALY: FAMILY: US04, line{1, 2}, Divorced before marriage in family 1.'])
 
 if __name__ == "__main__":
     unittest.main()
