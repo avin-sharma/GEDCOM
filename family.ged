@@ -106,6 +106,8 @@
 0 @I10@ INDI
 1 NAME Brad /Broadway/
 2 GIVN Brad
+1 DEAT
+2 DATE 06 JUL 2000
 2 SURN Broadway
 2 _MARNM Broadway
 1 SEX M

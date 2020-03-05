@@ -209,3 +209,45 @@ def marriage_before_divorce(individuals, families, tag_positions):
                 warnings.append(f'ANOMALY: FAMILY: US04, line{num}, Divorced before marriage in family {fam_id}.')
     
     return warnings
+
+def marriage_before_death(individuals, families, tag_positions):
+    """
+    User Story 05
+
+    Marriage should be before death.
+    """
+
+    warnings = []
+    for indi_id in individuals:
+        individual = individuals[indi_id]
+
+        if not individual.spouse or not individual.death:
+            continue
+        
+        for fam_spouse_id in individual.spouse:
+            if families[fam_spouse_id].married and families[fam_spouse_id].married > individual.death:
+                num = tag_positions[indi_id]['DEAT'] | tag_positions[fam_spouse_id]['MARR']
+                warnings.append(f'ANOMALY: INDIVIDUAL: US05, line {num}, {individual.name} was married after their death.')
+    
+    return warnings
+
+def divorce_before_death(individuals, families, tag_positions):
+    """
+    User Story 06
+
+    Divorce should be before death.
+    """
+
+    warnings = []
+    for indi_id in individuals:
+        individual = individuals[indi_id]
+
+        if not individual.spouse or not individual.death:
+            continue
+        
+        for fam_spouse_id in individual.spouse:
+            if families[fam_spouse_id].divorced and families[fam_spouse_id].divorced > individual.death:
+                num = tag_positions[indi_id]['DEAT'] | tag_positions[fam_spouse_id]['DIV']
+                warnings.append(f'ANOMALY: INDIVIDUAL: US06, line {num}, {individual.name} was divorced after their death.')
+    
+    return warnings
