@@ -1,7 +1,7 @@
 import os
 
 from process_output import save_information, print_tables
-from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death
+from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death, marriages_to_children, marriages_to_siblings
 from US_25 import US_25
 
 
@@ -129,4 +129,12 @@ if __name__ == "__main__":
     
     # User Story 06
     for warnings in divorce_before_death(individuals, families, tag_positions):
+        print(warnings)
+    
+    # User Story 017
+    for warnings in marriages_to_children(individuals, families, tag_positions):
+        print(warnings)
+    
+    # User Story 018
+    for warnings in marriages_to_siblings(individuals, families, tag_positions):
         print(warnings)

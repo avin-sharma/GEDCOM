@@ -251,3 +251,62 @@ def divorce_before_death(individuals, families, tag_positions):
                 warnings.append(f'ANOMALY: INDIVIDUAL: US06, line {num}, {individual.name} was divorced after their death.')
     
     return warnings
+
+def marriages_to_children(individuals, families, tag_positions):
+    """
+    User Story 17
+
+    No marriages to children.
+
+    Returns a list of string warnings.
+    """
+
+    warnings = []
+    for indi_id in individuals:
+        individual = individuals[indi_id]
+        spouses = set()
+        children = set()
+
+        if individual.spouse:
+            for spouse in individual.spouse:
+                family = families[spouse]
+                children |= family.children
+                if individual.id == family.hid:
+                    spouses.add(family.wid)
+                else:
+                    spouses.add(family.hid)
+            
+            child_spouse = spouses.intersection(children)
+            if child_spouse:
+                child_spouse = ' '.join(child_spouse)
+                num = tag_positions[indi_id]['FAMS']
+                warnings.append(f'ANOMALY: FAMILY: US17, line {num}, {individual.name} is married to their child(ren) {child_spouse}!')
+    
+    return warnings
+
+def marriages_to_siblings(individuals, families, tag_positions):
+    """
+    User Story 18
+
+    No marriages to children.
+
+    Returns a list of string warnings.
+    """
+
+    warnings = []
+    
+    for fam_id in families:
+        family = families[fam_id]
+
+        if not family.hid or not family.wid:
+            continue
+
+        husband = individuals[family.hid]
+        wife = individuals[family.wid]
+
+        for famc in husband.child:
+            if famc in wife.child:
+                num = tag_positions[family.hid]['FAMS'] | tag_positions[family.wid]['FAMS']
+                warnings.append(f'ANOMALY: FAMILY: US18, line {num}, {husband.name} and {wife.name} are siblings and married to each other!')
+    
+    return warnings

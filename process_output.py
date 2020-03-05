@@ -27,6 +27,14 @@ def save_information(inputs):
     families = {}
     tag_positions = {}
     for num, level, tag, arguments in inputs:
+
+        if tag == 'INDI' and arguments in individuals:
+            print(f'ERROR US22, line {num}, An Individual with ID {arguments} already exists!')
+            continue
+        elif tag == 'FAM' and arguments in families:
+            print(f'ERROR US22, line {num}, A Family with ID {arguments} already exists!')
+            continue
+
         active_tags[level] = tag
         
         # Saving previous 0 level entity.

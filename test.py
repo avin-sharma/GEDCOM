@@ -5,7 +5,7 @@ from datetime import datetime
 from main import parse_gedcom
 from family import Family
 from individual import Individual
-from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death
+from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death, marriages_to_children, marriages_to_siblings
 
 from US_25 import US_25
 from US_42 import check_and_convert_string_to_date
@@ -180,6 +180,24 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         
         self.assertEqual(divorce_before_death(individuals, families, tag_positions), ['ANOMALY: INDIVIDUAL: US06, line {35, 20}, Chris Something was divorced after their death.'])
+    
+    def test_US_17(self):
+        file_name = 'US_17_18.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        
+        self.assertEqual(marriages_to_children(individuals, families, tag_positions), ['ANOMALY: FAMILY: US17, line {18, 19}, Father is married to their child(ren) @I3@!'])
+    
+    def test_US_18(self):
+        file_name = 'US_17_18.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        
+        self.assertEqual(marriages_to_siblings(individuals, families, tag_positions), ['ANOMALY: FAMILY: US18, line {36, 29, 30}, Brother and Daughter are siblings and married to each other!'])
 
 if __name__ == "__main__":
     unittest.main()
