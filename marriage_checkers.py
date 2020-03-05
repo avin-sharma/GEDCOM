@@ -191,3 +191,21 @@ def check_marriage_aunts_uncles(individuals, families, tag_positions):
                 warnings.append(f'ANOMALY: FAMILY: US20, line{num} {individual.name} married to their uncle or aunt.')
     
     return warnings
+
+def marriage_before_divorce(individuals, families, tag_positions):
+    """
+    User Story 04
+
+    Marriage should be before divorce.
+    """
+
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+    
+        if family.married and family.divorced:
+            if family.married > family.divorced:
+                num = tag_positions[fam_id]['MARR'] | tag_positions[fam_id]['DIV']
+                warnings.append(f'ANOMALY: FAMILY: US04, line{num}, Divorced before marriage in family {fam_id}.')
+    
+    return warnings
