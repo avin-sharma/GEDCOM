@@ -41,6 +41,13 @@ def save_information(inputs):
             active_entity = Individual(arguments) if tag == 'INDI' else Family(arguments)
             # creating a new entity in tags dictionary so that we can add tags to it in the future
             tag_positions[arguments] = defaultdict(set)
+
+            # if level == 0 and arguments == '@I37@':
+            #     print(arguments, tag, individuals)
+            if tag == 'INDI' and arguments in individuals:
+                print(f'ERROR US22, line {num}, An Individual with ID {arguments} already exists!')
+            elif tag == 'FAM' and arguments in families:
+                print(f'ERROR US22, line {num}, A Family with ID {arguments} already exists!')
             continue
             
         if level == 0:
