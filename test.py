@@ -198,6 +198,13 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         
         self.assertEqual(marriages_to_siblings(individuals, families, tag_positions), ['ANOMALY: FAMILY: US18, line {36, 29, 30}, Brother and Daughter are siblings and married to each other!'])
+    
+    def test_US_22(self):
+        file_name = 'US_22.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
 
 if __name__ == "__main__":
     unittest.main()
