@@ -7,6 +7,7 @@ from US_25 import US_25
 
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from US16_21 import check_correct_gender, check_last_names
+from US35_36 import recent_births,recent_deaths
 
 from name_birth import unique_name_and_birth
 
@@ -137,4 +138,12 @@ if __name__ == "__main__":
     
     # User Story 018
     for warnings in marriages_to_siblings(individuals, families, tag_positions):
+        print(warnings)
+
+    #User Story 35
+    for warnings in recent_births(individuals,tag_positions):
+        print(warnings)
+
+    #User Story 36
+    for warnings in recent_deaths(individuals,tag_positions):
         print(warnings)
