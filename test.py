@@ -11,6 +11,7 @@ from US_25 import US_25
 from US_42 import check_and_convert_string_to_date
 
 from US16_21 import check_correct_gender, check_last_names
+from US35_36 import recent_births,recent_deaths
 
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from name_birth import unique_name_and_birth
@@ -220,15 +221,31 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
 
+    def test_US_35(self):
+        file_name='US_35_36.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(recent_births(individuals,tag_positions),['ANOMALY: INDIVIDUAL: US35, line {55}, Praj Shah has most recent birthday.', 'ANOMALY: INDIVIDUAL: US35, line {64}, Waah Shah has most recent birthday.'])
+
     def test_US_31(self):
         file_name = 'US_31.ged'
         file_path = os.path.join(
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-
         self.assertEqual(listLivingSingle(individuals, families, tag_positions), [
                          'Kevin Millow is over 30 years and still not married'])
+
+
+    def test_US_36(self):
+        file_name='US_35_36.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(recent_deaths(individuals,tag_positions),['ANOMALY: INDIVIDUAL: US35, line {84}, Raj Shah has most recent death.', 'ANOMALY: INDIVIDUAL: US35, line {100}, Prem Shah has most recent death.'])
 
     def test_US_32(self):
         file_name = 'US_32.ged'
@@ -236,10 +253,8 @@ class TestGEDCOM(unittest.TestCase):
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-
         self.assertEqual(multiple_birth(individuals, families, tag_positions), [
-                         "ANOMALY: FAMILY: US32, ['Amit Shah', 'Kevin Millow'] The two or more individuals were born at the same time"])
-
+                    "ANOMALY: FAMILY: US32, ['Amit Shah', 'Kevin Millow'] The two or more individuals were born at the same time"])
 
 if __name__ == "__main__":
     unittest.main()
