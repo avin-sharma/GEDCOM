@@ -46,6 +46,9 @@ def save_information(inputs):
         if level == 0:
             continue
         tag_positions[active_entity.id][tag].add(num)
+
+        if tag in ['DEAT', 'BIRT', 'MARR', 'DIV']:
+            continue
         
         # Since all the three fields are sets we add elements to them.
         if tag in ['FAMC', 'FAMS', 'CHIL']:
@@ -54,7 +57,7 @@ def save_information(inputs):
             # If we have a date tag convert argument to datetime
             if level == 2:
                 tag = active_tags[1]
-                arguments = check_and_convert_string_to_date(arguments)
+                arguments = check_and_convert_string_to_date(arguments, num)
 
             setattr(active_entity, active_entity.map[tag], arguments)
     
@@ -78,6 +81,7 @@ def save_information(inputs):
                 if deathday > datetime.now():
                     deathday =  datetime.now()
             else:
+                current.alive = True
                 deathday =  datetime.now()
             difference = deathday - birthday
             current.age = (difference.days + difference.seconds//86400)//365

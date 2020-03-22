@@ -1,46 +1,58 @@
+ERROR: US42, line 157, Illegitimate date!
+Individuals
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
 |   ID  |       Name      | Gender |   Birthday  | Age | Alive |    Death    |   Child   |      Spouse      |
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
-| @I10@ |  Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |     NA    |     {'@F4@'}     |
-| @I11@ |   Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |     NA    |     {'@F4@'}     |
-| @I12@ |   Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |     NA    |     {'@F2@'}     |
-| @I13@ |   Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |     NA    |     {'@F2@'}     |
-| @I14@ |   Sofia Milano  |   F    |      NA     |  NA |  True |      NA     |  {'@F6@'} |     {'@F8@'}     |
-| @I15@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |     NA    |     {'@F8@'}     |
-| @I16@ |    Meet Smith   |   M    |      NA     |  NA |  True |      NA     | {'@F10@'} |     {'@F9@'}     |
-| @I17@ |    Anita Shah   |   F    |      NA     |  NA |  True |      NA     |     NA    |    {'@F10@'}     |
-| @I18@ |   Alina Smith   |   M    |      NA     |  NA |  True |      NA     |     NA    |     {'@F9@'}     |
-| @I19@ |    Loka Smith   |   F    |      NA     |  NA |  True |      NA     |  {'@F9@'} |    {'@F11@'}     |
-|  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     |  {'@F1@'} |    {'@F10@'}     |
+| @I10@ |  Brad Broadway  |   M    | Nov 08 1934 |  85 |  True |      NA     |     NA    |     {'@F5@'}     |
+| @I11@ |   Olivia Noway  |   F    | Jan 06 1933 |  87 |  True |      NA     |     NA    |     {'@F5@'}     |
+| @I12@ |   Ross Highway  |   M    | Aug 29 1932 |  87 |  True |      NA     |     NA    |     {'@F3@'}     |
+| @I13@ |   Monica Bing   |   F    | Dec 19 1934 |  85 |  True |      NA     |     NA    |     {'@F3@'}     |
+| @I14@ |   Sofia Milano  |   F    | Dec 19 2021 |  -2 |  True |      NA     |  {'@F7@'} |     {'@F9@'}     |
+| @I15@ |   Jacob Milano  |   M    |      NA     |  NA |  True |      NA     |     NA    |     {'@F9@'}     |
+| @I16@ |    Meet Smith   |   M    |      NA     |  NA |  True |      NA     |  {'@F1@'} |    {'@F10@'}     |
+| @I17@ |   Alina Smith   |   M    |      NA     |  NA |  True |      NA     |     NA    |    {'@F10@'}     |
+| @I18@ |    Anita Shah   |   F    |      NA     |  NA |  True |      NA     |     NA    |     {'@F1@'}     |
+| @I19@ |    Loka Smith   |   F    |      NA     |  NA |  True |      NA     | {'@F10@'} |    {'@F11@'}     |
+|  @I1@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     |  {'@F2@'} |     {'@F1@'}     |
 | @I20@ |   Evita Smith   |   F    |      NA     |  NA |  True |      NA     |     NA    |    {'@F11@'}     |
-|  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 |  {'@F2@'} |     {'@F1@'}     |
-|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     |  {'@F4@'} | {'@F1@', '@F3@'} |
-|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     |  {'@F6@'} | {'@F5@', '@F3@'} |
-|  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |     NA    |     {'@F5@'}     |
-|  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     |  {'@F3@'} |     {'@F7@'}     |
-|  @I7@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     |  {'@F8@'} |     {'@F7@'}     |
-|  @I8@ |  Roberto Milano |   M    | Oct 17 1930 |  89 |  True |      NA     |     NA    |     {'@F6@'}     |
-|  @I9@ |  Maria Ferrari  |   F    | Mar 26 1932 |  87 |  True |      NA     |     NA    |     {'@F6@'}     |
+| @I21@ |  James Highway  |   M    | Jan 01 1994 |  26 |  True |      NA     |  {'@F2@'} |        NA        |
+|  @I2@ |   Rick Highway  |   M    | Mar 03 1960 |  36 | False | Feb 10 1997 |  {'@F3@'} |     {'@F2@'}     |
+|  @I3@ |  Emma Broadway  |   F    | Jan 02 1962 |  58 |  True |      NA     |  {'@F5@'} | {'@F4@', '@F2@'} |
+|  @I4@ |   Oscar Milano  |   M    | Aug 24 1960 |  59 |  True |      NA     |  {'@F7@'} | {'@F4@', '@F6@'} |
+|  @I5@ |   Joan Watson   |   F    | Jun 24 1964 |  55 |  True |      NA     |     NA    |     {'@F6@'}     |
+|  @I6@ |   Joey Milano   |   M    | Sep 09 2001 |  18 |  True |      NA     |  {'@F4@'} |     {'@F8@'}     |
+|  @I7@ | Isabella Milano |   F    |      NA     |  NA |  True |      NA     |  {'@F9@'} |     {'@F8@'}     |
+|  @I8@ |  Roberto Milano |   M    | Mar 26 1932 |  87 |  True |      NA     |     NA    |     {'@F7@'}     |
+|  @I9@ |  Maria Ferrari  |   F    | Oct 17 1880 | 139 |  True | Nov 07 2021 |     NA    |     {'@F7@'}     |
 +-------+-----------------+--------+-------------+-----+-------+-------------+-----------+------------------+
 
-
 Families
-+-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
-|   ID  |   Married   | Divorced | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
-+-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
-| @F10@ |      NA     |    NA    |    @I1@    | James Highway  |  @I17@  |    Anita Shah   |     {'@I16@'}     |
-| @F11@ |      NA     |    NA    |   @I20@    |  Evita Smith   |  @I19@  |    Loka Smith   |         NA        |
-|  @F1@ | Sep 10 1992 |    NA    |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  |      {'@I1@'}     |
-|  @F2@ | Jan 01 1959 |    NA    |   @I12@    |  Ross Highway  |  @I13@  |   Monica Bing   |      {'@I2@'}     |
-|  @F3@ | Aug 06 2000 |    NA    |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
-|  @F4@ |      NA     |    NA    |   @I10@    | Brad Broadway  |  @I11@  |   Olivia Noway  |      {'@I3@'}     |
-|  @F5@ |      NA     |    NA    |    @I4@    |  Oscar Milano  |   @I5@  |   Joan Watson   |         NA        |
-|  @F6@ |      NA     |    NA    |    @I8@    | Roberto Milano |   @I9@  |  Maria Ferrari  | {'@I14@', '@I4@'} |
-|  @F7@ |      NA     |    NA    |    @I6@    |  Joey Milano   |   @I7@  | Isabella Milano |         NA        |
-|  @F8@ |      NA     |    NA    |   @I15@    |  Jacob Milano  |  @I14@  |   Sofia Milano  |      {'@I7@'}     |
-|  @F9@ |      NA     |    NA    |   @I18@    |  Alina Smith   |  @I16@  |    Meet Smith   |     {'@I19@'}     |
-+-------+-------------+----------+------------+----------------+---------+-----------------+-------------------+
++-------+-------------+-------------+------------+----------------+---------+-----------------+-------------------+
+|   ID  |   Married   |   Divorced  | Husband ID |  Husband Name  | Wife ID |    Wife Name    |      Children     |
++-------+-------------+-------------+------------+----------------+---------+-----------------+-------------------+
+| @F10@ |      NA     |      NA     |   @I17@    |  Alina Smith   |  @I16@  |    Meet Smith   |     {'@I19@'}     |
+| @F11@ |      NA     |      NA     |   @I20@    |  Evita Smith   |  @I19@  |    Loka Smith   |         NA        |
+|  @F1@ |      NA     |      NA     |    @I1@    | James Highway  |  @I18@  |    Anita Shah   |     {'@I16@'}     |
+|  @F2@ | Sep 10 1992 |      NA     |    @I2@    |  Rick Highway  |   @I3@  |  Emma Broadway  | {'@I21@', '@I1@'} |
+|  @F3@ | Jan 01 1959 |      NA     |   @I12@    |  Ross Highway  |  @I13@  |   Monica Bing   |      {'@I2@'}     |
+|  @F4@ | Aug 06 2021 |      NA     |    @I4@    |  Oscar Milano  |   @I3@  |  Emma Broadway  |      {'@I6@'}     |
+|  @F5@ | Aug 06 2000 |      NA     |   @I10@    | Brad Broadway  |  @I11@  |   Olivia Noway  |      {'@I3@'}     |
+|  @F6@ |      NA     | Aug 09 2021 |    @I4@    |  Oscar Milano  |   @I5@  |   Joan Watson   |         NA        |
+|  @F7@ | Aug 06 1901 |      NA     |    @I8@    | Roberto Milano |   @I9@  |  Maria Ferrari  | {'@I14@', '@I4@'} |
+|  @F8@ |      NA     |      NA     |    @I6@    |  Joey Milano   |   @I7@  | Isabella Milano |         NA        |
+|  @F9@ |      NA     |      NA     |   @I15@    |  Jacob Milano  |  @I14@  |   Sofia Milano  |      {'@I7@'}     |
++-------+-------------+-------------+------------+----------------+---------+-----------------+-------------------+
 
-ANOMALY: FAMILY: US11, line {56, 55}, Oscar Milano has more than 1 active marriages!
-ANOMALY: FAMILY: US19, line {232, 233, 83, 75} Joey Milano is married to his first cousin Isabella Milano!
-
+ANOMALY: INDIVIDUAL: US11, line {56, 55}, Oscar Milano has more than 1 active marriages!
+ANOMALY: FAMILY: US19, line {83, 75, 260, 261} Joey Milano is married to his first cousin Isabella Milano!
+ANOMALY: INDIVIDUAL: US01, line {147},Sofia Milano is born after current date
+ANOMALY: FAMILY: US01, line {232},Oscar Milano and Emma Broadway are married after current date
+ANOMALY: FAMILY: US01, line {241},Oscar Milano and Joan Watson are divorced after current date
+ANOMALY: INDIVIDUAL: US01, line {102},Maria Ferrari died after current date
+ANOMALY: FAMILY: US02, line {256, 91},Roberto Milano Married before birth
+ANOMALY: INDIVIDUAL: US21, line {165}, Meet Smith has different gender than expected
+ANOMALY: INDIVIDUAL: US21, line {195}, Evita Smith has different gender than expected
+ANOMALY: INDIVIDUAL: US16, line {161, 15}, Meet Smith last name is diffrent than James Highway last name
+ANOMALY: INDIVIDUAL: US23, line {198, 15}, James Highway has similar name and birthdate.
+ANOMALY: US25: line {198, 15}, There are multiple James Highway in the family.
+ANOMALY: US25: line {203, 20}, There are multiple people born on Jan 01 1994 in the family.

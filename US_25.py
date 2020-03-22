@@ -1,5 +1,6 @@
 from helpers import convert_date_to_string
 from collections import defaultdict
+
 def US_25(individuals, families, tag_positions):
     warnings=[]
     for family in families.values():
@@ -18,7 +19,8 @@ def US_25(individuals, families, tag_positions):
             if child.birth in birth_dates:
                 birthdate = convert_date_to_string(child.birth)
                 warnings.append(f'ANOMALY: US25: line {birth_dates[child.birth] | num}, There are multiple people born on {birthdate} in the family.')
-                
-            birth_dates[child.birth] |= num
+
+            if child.birth:    
+                birth_dates[child.birth] |= num
             
     return warnings
