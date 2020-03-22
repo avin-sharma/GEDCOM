@@ -1,0 +1,56 @@
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE Family 3
+1 DATE 22 MAR 2020
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Jay Goyani
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Noah /Millow/
+2 GIVN Noah
+2 SURN Millow
+2 _MARNM Millow
+1 SEX M
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Alina /Millow/
+2 GIVN Alina
+2 SURN Millow
+2 _MARNM Millow
+1 SEX F
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Amit /Shah/
+2 GIVN Amit
+2 SURN Shah
+2 _MARNM Shah
+1 SEX M
+1 BIRT
+2 DATE 4 MAR 1960
+1 FAMS @F2@
+1 FAMC @F1@
+0 @I4@ INDI
+1 NAME Kevin /Millow/
+2 GIVN Kevin
+2 SURN Millow
+2 _MARNM Millow
+1 SEX M
+1 BIRT
+2 DATE 4 MAR 1960
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 CHIL @I4@
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I3@
+1 _CURRENT N
+0 TRLR
