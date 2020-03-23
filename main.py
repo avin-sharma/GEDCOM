@@ -3,14 +3,15 @@ import os
 from process_output import save_information, print_tables
 from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death
 from US_25 import US_25
+from US_38 import US_38
+from US_39 import US_39
+from US35_36 import recent_births,recent_deaths
 
 
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage
 from US16_21 import check_correct_gender, check_last_names
-from US35_36 import recent_births,recent_deaths
 
 from name_birth import unique_name_and_birth
-from US31_32 import listLivingSingle, multiple_birth
 
 
 def parse_gedcom(path, output_path):
@@ -120,33 +121,30 @@ if __name__ == "__main__":
     # User Story 20
     for warnings in check_marriage_aunts_uncles(individuals, families, tag_positions):
         print(warnings)
-
+    
     # User Story 04
     for warnings in marriage_before_divorce(individuals, families, tag_positions):
         print(warnings)
-
+    
     # User Story 05
     for warnings in marriage_before_death(individuals, families, tag_positions):
         print(warnings)
-
+    
     # User Story 06
     for warnings in divorce_before_death(individuals, families, tag_positions):
         print(warnings)
 
-    for warnings in multiple_birth(individuals, families, tag_positions):
-        print(warnings)
-    
-    # User Story 018
-    for warnings in marriages_to_siblings(individuals, families, tag_positions):
+    # User Story 38
+    for warnings in US_38(individuals, families, tag_positions):
         print(warnings)
 
-    #User Story 35
-    for warnings in recent_births(individuals,tag_positions):
+    # User Story 39
+    for warnings in US_39(individuals, families, tag_positions):
         print(warnings)
 
-    #User Story 36
-    for warnings in recent_deaths(individuals,tag_positions):
+    # User Story 35_36
+    for warnings in recent_births(individuals, tag_positions):
         print(warnings)
-        
-    for warning in listLivingSingle(individuals, families, tag_positions):
-        print(warning)
+
+    for warnings in recent_deaths(individuals, tag_positions):
+        print(warnings)
