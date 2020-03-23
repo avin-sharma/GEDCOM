@@ -58,3 +58,39 @@ def check_BirthBeforeMarriage(individuals,families, tag_positions):
                     num = tag_positions[indi_id]['BIRT']|tag_positions[fam_id]['MARR']
                     warnings.append(f'ANOMALY: FAMILY: US02, line {num},{individual.name} Married before birth')
     return warnings
+
+def check_BirthBeforeDeath(individuals,tag_positions): ##US03 : Birth should occur before death of an individual
+    warnings = []
+    for indi_id in individuals:
+        individual = individuals[indi_id]
+        if individual.death != None and individual.birth != None:
+            if individual.birth > individual.death:
+                num = tag_positions[indi_id]['DEAT']|tag_positions[indi_id]['BIRT']
+                warnings.append(f'ANOMALY: Individual: US03, line {num},{individual.name} died before birth')
+    return warnings
+
+def check_BirthBeforeMarriageOfParents(individuals,families, tag_positions): ##US08: Birth before marriage of parents
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        for child_id in family.children:
+            individual = individuals[child_id]
+            if individual.birth != None and family.married != None:
+                if(individual.birth < family.married):
+                    num = tag_positions[child_id]['BIRT']
+                    warnings.append(f'ANOMALY: FAMILY: US08, line {num},{individual.name} was born before marriage of parents')
+    return warnings
+    
+def check_BirthAfterDivorceOfParents(individuals,families, tag_positions):##US 08 born not more than 9 months after their divorce
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        for child_id in family.children:
+            individual = individuals[child_id]
+            if individual.birth != None and family.married != None:
+                if individual.birth != None and family.divorced != None:
+                    divorceDayDifference = family.divorced - individual.birth
+                    if(divorceDayDifference.days < -275):
+                        num = tag_positions[child_id]['BIRT']
+                        warnings.append(f'ANOMALY: FAMILY: US08, line {num},{individual.name} born more than 9 months after divorce of parents')
+    return warnings
