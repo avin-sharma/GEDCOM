@@ -47,7 +47,7 @@ def recent_deaths(individuals, tag_positions):
         try:
             if abs((x1[j]-present_date).days)<=30:
                 num = tag_positions[x2[j]]['NAME']
-                warnings.append(f"ANOMALY: INDIVIDUAL: US35, line {num}, {x3[j]} has most recent death.")
+                warnings.append(f"ANOMALY: INDIVIDUAL: US36, line {num}, {x3[j]} has most recent death.")
         except:
             continue
     #print(warnings)
