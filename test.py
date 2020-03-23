@@ -9,6 +9,8 @@ from marriage_checkers import is_alive, bigamy, first_cousins_married, check_sib
 
 from US_25 import US_25
 from US_42 import check_and_convert_string_to_date
+from US_38 import US_38
+from US_39 import US_39
 
 from US16_21 import check_correct_gender, check_last_names
 from US35_36 import recent_births,recent_deaths
@@ -245,7 +247,7 @@ class TestGEDCOM(unittest.TestCase):
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-        self.assertEqual(recent_deaths(individuals,tag_positions),['ANOMALY: INDIVIDUAL: US35, line {84}, Raj Shah has most recent death.', 'ANOMALY: INDIVIDUAL: US35, line {100}, Prem Shah has most recent death.'])
+        self.assertEqual(recent_deaths(individuals,tag_positions),['ANOMALY: INDIVIDUAL: US36, line {84}, Raj Shah has most recent death.', 'ANOMALY: INDIVIDUAL: US36, line {100}, Prem Shah has most recent death.'])
 
     def test_US_32(self):
         file_name = 'US_32.ged'
@@ -275,6 +277,19 @@ class TestGEDCOM(unittest.TestCase):
         'ANOMALY: FAMILY: US08, line {40},Samir Shah was born before marriage of parents'])
         self.assertEqual(check_BirthAfterDivorceOfParents(individuals,families ,tag_positions), [
         'ANOMALY: FAMILY: US08, line {56},Raj Shah born more than 9 months after divorce of parents'])
+
+    def test_US_38(self):
+        file_name = 'US_38_39.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_38(individuals, families, tag_positions), ["ANOMALY: INDIVIDUAL: US38, line {15}, The upcoming birthday in next 30 days is of Saddi Shah on Apr 09 2019"])
+
+    def test_US_39(self):
+        file_name = 'US_38_39.ged'
+        file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_39(individuals, families, tag_positions), ["ANOMALY: FAMILY: US39: line {35} and {24}, The upcoming anniversaries in next 30 days is of Dhiru Shah and Gari Jain on Apr 07 2000"])
+
 
 if __name__ == "__main__":
     unittest.main()
