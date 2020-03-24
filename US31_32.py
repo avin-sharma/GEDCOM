@@ -26,6 +26,7 @@ def listLivingSingle(individuals, families, tag_positions):
     for indi_id in individuals:
         individual = individuals[indi_id]
         if(individual.age != None and int(individual.age) > 30 and individual.death == None and len(individual.spouse) == 0):
+            num = tag_positions[indi_id]['NAME']
             warning.append(
-                f'{individual.name} is over 30 years and still not married')
+                f'Line {num} {individual.name} is over 30 years and still not married')
     return warning
