@@ -5,12 +5,13 @@ from marriage_checkers import bigamy, first_cousins_married, check_sibling_count
 from US_25 import US_25
 from US_38 import US_38
 from US_39 import US_39
-from US35_36 import recent_births,recent_deaths
+from US35_36 import recent_births, recent_deaths
 
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents,check_BirthAfterDivorceOfParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents
 from US16_21 import check_correct_gender, check_last_names
 
 from name_birth import unique_name_and_birth
+from US31_32 import multiple_birth, listLivingSingle
 
 
 def parse_gedcom(path, output_path):
@@ -120,15 +121,15 @@ if __name__ == "__main__":
     # User Story 20
     for warnings in check_marriage_aunts_uncles(individuals, families, tag_positions):
         print(warnings)
-    
+
     # User Story 04
     for warnings in marriage_before_divorce(individuals, families, tag_positions):
         print(warnings)
-    
+
     # User Story 05
     for warnings in marriage_before_death(individuals, families, tag_positions):
         print(warnings)
-    
+
     # User Story 06
     for warnings in divorce_before_death(individuals, families, tag_positions):
         print(warnings)
@@ -147,13 +148,19 @@ if __name__ == "__main__":
 
     for warnings in recent_deaths(individuals, tag_positions):
         print(warnings)
-    
+
     # User Story 03
-    for warnings in check_BirthBeforeDeath(individuals,tag_positions):
+    for warnings in check_BirthBeforeDeath(individuals, tag_positions):
         print(warnings)
     # User Story 08
-    for warnings in check_BirthBeforeMarriageOfParents(individuals,families, tag_positions):
+    for warnings in check_BirthBeforeMarriageOfParents(individuals, families, tag_positions):
         print(warnings)
     # User Story 08
-    for warnings in check_BirthAfterDivorceOfParents(individuals,families, tag_positions):
+    for warnings in check_BirthAfterDivorceOfParents(individuals, families, tag_positions):
         print(warnings)
+    # User Story 31
+    for warnings in multiple_birth(individuals, families, tag_positions):
+        print(warnings)
+    # User Story 32
+    for warning in listLivingSingle(individuals, families, tag_positions):
+        print(warning)
