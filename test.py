@@ -282,6 +282,8 @@ class TestGEDCOM(unittest.TestCase):
         file_name = 'US_38_39.ged'
         file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
         self.assertEqual(US_38(individuals, families, tag_positions), ["ANOMALY: INDIVIDUAL: US38, line {15}, The upcoming birthday in next 30 days is of Saddi Shah on Apr 09 2019"])
 
     def test_US_39(self):
@@ -289,7 +291,9 @@ class TestGEDCOM(unittest.TestCase):
         file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
         self.assertEqual(US_39(individuals, families, tag_positions), ["ANOMALY: FAMILY: US39: line {35} and {24}, The upcoming anniversaries in next 30 days is of Dhiru Shah and Gari Jain on Apr 07 2000"])
-
+        file_path = os.path.join(current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_39(individuals, families, tag_positions), ["ANOMALY: FAMILY: US39: line {35} and {24}, The upcoming anniversaries in next 30 days is of Dhiru Shah and Gari Jain on Apr 07 2000"])
 
 if __name__ == "__main__":
     unittest.main()
