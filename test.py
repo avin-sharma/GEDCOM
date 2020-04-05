@@ -21,6 +21,8 @@ from US31_32 import multiple_birth, listLivingSingle
 from US07_24 import age_is_legal, unique_family_by_spouse
 from US_34 import US_34
 from US_37 import US_37
+from US_26_33 import list_orphans, corresponding_entries
+
 
 
 current_directory = os.getcwd()
@@ -333,6 +335,25 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(US_37(individuals, families, tag_positions), ["ANOMALY: FAMILY: US37: line {47} and {15}, Living Spouse: Dhruv Shah and Descendant: Saddi Shah .","ANOMALY: FAMILY: US37: line {37} and {57}, Living Spouse: Dhiru Shah and Descendant: Praj Shah .","ANOMALY: FAMILY: US37: line {95} and {37}, Living Spouse: Riya Patel and Descendant: Dhiru Shah ."])
+
+
+    def test_US_33(self):
+        file_name="US_26_33.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(list_orphans(individuals, families, tag_positions), [
+            "ANOMALY: INDIVIDUAL: US33, line {40},is orphans."])
+
+
+    def test_US_26(self):
+        file_name="US_26_33.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(corresponding_entries(individuals,families,tag_positions), ["ANOMALY: US26,either line {83} does not have corresponding entry"])
 
 
 if __name__ == "__main__":

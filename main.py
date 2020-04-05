@@ -14,7 +14,7 @@ from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US_34 import US_34
 from US_37 import US_37
-
+from US_26_33 import corresponding_entries,list_orphans
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -174,3 +174,9 @@ if __name__ == "__main__":
     # User Story 37
     for warning in US_37(individuals, families, tag_positions):
         print(warning)
+    # User Story 33
+    for warnings in list_orphans(individuals,families,tag_positions):
+        print(warnings)
+    #User Story 26
+    for warnings in corresponding_entries(individuals,families,tag_positions):
+        print(warnings)
