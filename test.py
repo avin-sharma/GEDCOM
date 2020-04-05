@@ -19,6 +19,8 @@ from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, c
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US07_24 import age_is_legal, unique_family_by_spouse
+from US_34 import US_34
+from US_37 import US_37
 
 
 current_directory = os.getcwd()
@@ -122,8 +124,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
 
-        self.assertEqual(US_25(individuals, families, tag_positions), ['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.',
-                                                                       'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
+        self.assertEqual(US_25(individuals, families, tag_positions), ['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.','ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
         self.assertEqual(check_and_convert_string_to_date(
@@ -316,6 +317,22 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         self.assertEqual(unique_family_by_spouse(individuals, families, tag_positions), [
                          "ANAMOLY: FAMILY: US24, line {88, 89, 87}, Family contain same husband (Raj Patel), same wife (Jaya Patel) and same marraige date (1990-03-04 00:00:00) as another family."])
+
+    def US_34(self):
+        file_name = 'US_34_37.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_34(individuals, families, tag_positions), ["ANOMALY: FAMILY: US34: line {37} and {24}, Dhiru Shah and Gari Jain are the couples who were married when the older spouse was more than twice as old as the younger spouse.","ANOMALY: FAMILY: US34: line {104} and {95}, Prem Shah and Riya Patel are the couples who were married when the older spouse was more than twice as old as the younger spouse."])
+
+    def US_37(self):
+        file_name = 'US_37.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_37(individuals, families, tag_positions), ["ANOMALY: FAMILY: US37: line {47} and {15}, Living Spouse: Dhruv Shah and Descendant: Saddi Shah .","ANOMALY: FAMILY: US37: line {37} and {57}, Living Spouse: Dhiru Shah and Descendant: Praj Shah .","ANOMALY: FAMILY: US37: line {95} and {37}, Living Spouse: Riya Patel and Descendant: Dhiru Shah ."])
 
 
 if __name__ == "__main__":
