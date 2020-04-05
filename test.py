@@ -240,7 +240,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(listLivingSingle(individuals, families, tag_positions), [
-                         'Line {44} Kevin Millow is over 30 years and still not married'])
+                         'ANOMALY: INDIVIDUAL: US31,Line {44} Kevin Millow is over 30 years and still not married'])
 
     def test_US_36(self):
         file_name = 'US_35_36.ged'
