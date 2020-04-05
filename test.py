@@ -18,6 +18,7 @@ from US35_36 import recent_births, recent_deaths
 from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
+from US07_24 import age_is_legal, unique_family_by_spouse
 
 
 current_directory = os.getcwd()
@@ -296,6 +297,25 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         self.assertEqual(US_39(individuals, families, tag_positions), [
                          "ANOMALY: FAMILY: US39: line {35} and {24}, The upcoming anniversaries in next 30 days is of Dhiru Shah and Gari Jain on Apr 07 2000"])
+
+    def test_US_07(self):
+        file_name = 'US_07.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(age_is_legal(individuals, families, tag_positions), [
+                         'ANAMOLY: INDIVIDUAL: US07, line {20}, Raj Patel was over 150 years old when he was dead.'
+                         ,"ANAMOLY: INDIVIDUAL: US07, line {42}, Kevin Patel is over 150 years old and alive."])
+    
+    def test_US_24(self):
+        file_name = 'US_24.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(unique_family_by_spouse(individuals, families, tag_positions), [
+                         "ANAMOLY: FAMILY: US24, line {88, 89, 87}, Family contain same husband (Raj Patel), same wife (Jaya Patel) and same marraige date (1990-03-04 00:00:00) as another family."])
 
 
 if __name__ == "__main__":

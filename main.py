@@ -12,6 +12,7 @@ from US16_21 import check_correct_gender, check_last_names
 
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
+from US07_24 import age_is_legal, unique_family_by_spouse
 
 
 def parse_gedcom(path, output_path):
@@ -163,4 +164,10 @@ if __name__ == "__main__":
         print(warnings)
     # User Story 32
     for warning in listLivingSingle(individuals, families, tag_positions):
+        print(warning)
+    # User Story 07
+    for warning in age_is_legal(individuals, families, tag_positions):
+        print(warning)
+    # User Story 24
+    for warning in unique_family_by_spouse(individuals, families, tag_positions):
         print(warning)
