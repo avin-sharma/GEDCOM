@@ -1,6 +1,5 @@
 import os
 import unittest
-import dateutil
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
