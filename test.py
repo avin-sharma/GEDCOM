@@ -1,6 +1,7 @@
 import os
 import unittest
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 from main import parse_gedcom
 from family import Family
@@ -15,10 +16,14 @@ from US_39 import US_39
 from US16_21 import check_correct_gender, check_last_names
 from US35_36 import recent_births, recent_deaths
 
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents,check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US07_24 import age_is_legal, unique_family_by_spouse
+from US_34 import US_34
+from US_37 import US_37
+from US_26_33 import list_orphans, corresponding_entries
+
 
 
 current_directory = os.getcwd()
@@ -122,8 +127,7 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
 
-        self.assertEqual(US_25(individuals, families, tag_positions), ['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.',
-                                                                       'ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
+        self.assertEqual(US_25(individuals, families, tag_positions), ['ANOMALY: US25: line {69, 15}, There are multiple Hp Pate in the family.','ANOMALY: US25: line {74, 20}, There are multiple people born on Jan 02 1970 in the family.'])
 
     def test_US_42(self):
         self.assertEqual(check_and_convert_string_to_date(
@@ -317,6 +321,60 @@ class TestGEDCOM(unittest.TestCase):
         self.assertEqual(unique_family_by_spouse(individuals, families, tag_positions), [
                          "ANAMOLY: FAMILY: US24, line {88, 89, 87}, Family contain same husband (Raj Patel), same wife (Jaya Patel) and same marraige date (1990-03-04 00:00:00) as another family."])
 
+    def US_34(self):
+        file_name = 'US_34_37.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_34(individuals, families, tag_positions), ["ANOMALY: FAMILY: US34: line {37} and {24}, Dhiru Shah and Gari Jain are the couples who were married when the older spouse was more than twice as old as the younger spouse.","ANOMALY: FAMILY: US34: line {104} and {95}, Prem Shah and Riya Patel are the couples who were married when the older spouse was more than twice as old as the younger spouse."])
+
+    def US_37(self):
+        file_name = 'US_37.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(US_37(individuals, families, tag_positions), ["ANOMALY: FAMILY: US37: line {47} and {15}, Living Spouse: Dhruv Shah and Descendant: Saddi Shah .","ANOMALY: FAMILY: US37: line {37} and {57}, Living Spouse: Dhiru Shah and Descendant: Praj Shah .","ANOMALY: FAMILY: US37: line {95} and {37}, Living Spouse: Riya Patel and Descendant: Dhiru Shah ."])
+
+
+    def test_US_33(self):
+        file_name="US_26_33.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(list_orphans(individuals, families, tag_positions), [
+            "ANOMALY: INDIVIDUAL: US33, line {40},is orphans."])
+
+
+    def test_US_26(self):
+        file_name="US_26_33.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(corresponding_entries(individuals,families,tag_positions), ["ANOMALY: US26,either line {83} does not have corresponding entry"])
+
+    def test_US_09(self):
+        file_name="US_09,US_10.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthBeforeDeathOfMother(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US09, line{30},Sofia Milano born after death of mother Maria Ferrari'])
+        self.assertEqual(check_BirthAfterDeathOfFather(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US09, line{89},Suyash Jha born 9 months after death of father Jash Jha'])
+    
+    def test_US_10(self):
+        file_name="US_09,US_10.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthofParents(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US10, line{30}, Sofia Milano Mother of child Isabella Milano is less than 14 years old'])
 
 if __name__ == "__main__":
     unittest.main()
