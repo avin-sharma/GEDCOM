@@ -94,3 +94,53 @@ def check_BirthAfterDivorceOfParents(individuals,families, tag_positions):##US 0
                         num = tag_positions[child_id]['BIRT']
                         warnings.append(f'ANOMALY: FAMILY: US08, line {num},{individual.name} born more than 9 months after divorce of parents')
     return warnings
+# US09	Birth before death of parents	Child should be born before death of mother and before 9 months after death of father
+
+def check_BirthBeforeDeathOfMother(individuals,families, tag_positions):
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        for child_id in family.children:
+            if family.wid != None:
+                individual_child = individuals[child_id]
+                individual_mother = individuals[family.wid]
+                if individual_child.birth != None and  individual_mother.death != None:
+                    if individual_child.birth > individual_mother.death:
+                        num = tag_positions[child_id]['BIRT']
+                        warnings.append(f'ANOMALY: FAMILY: US09, line{num},{individual_child.name} born after death of mother {individual_mother.name}')
+    return warnings
+
+def check_BirthAfterDeathOfFather(individuals,families, tag_positions):
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        for child_id in family.children:
+            if family.hid != None:
+                individual_father = individuals[family.hid]
+                individual_child = individuals[child_id]
+                if individual_child.birth != None and  individual_father.death != None:
+                    diff = individual_father.death - individual_child.birth
+                    if diff.days < -275:
+                        num = tag_positions[child_id]['BIRT']
+                        warnings.append(f'ANOMALY: FAMILY: US09, line{num},{individual_child.name} born 9 months after death of father {individual_father.name}')
+    return warnings
+
+# US10	Marriage after 14	Marriage should be at least 14 years after birth of both spouses (parents must be at least 14 years old)
+
+def check_BirthofParents(individuals,families, tag_positions):
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        if family.hid != None:
+            individual_father = individuals[family.hid]
+        if family.wid != None:
+            individual_mother = individuals[family.wid]
+            for child_id in family.children:
+                individual_child = individuals[child_id]
+                if individual_father.age != None and individual_father.age < 14:
+                    num = tag_positions[family.hid]['BIRT']
+                    warnings.append(f'ANOMALY: FAMILY: US10, line{num}, {individual_father.name} Father of child {individual_child.name} is less than 14 years old')
+                if individual_mother.age != None and individual_mother.age < 14:
+                    num = tag_positions[family.wid]['BIRT']
+                    warnings.append(f'ANOMALY: FAMILY: US10, line{num}, {individual_mother.name} Mother of child {individual_child.name} is less than 14 years old')
+    return warnings

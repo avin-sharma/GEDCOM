@@ -16,7 +16,7 @@ from US_39 import US_39
 from US16_21 import check_correct_gender, check_last_names
 from US35_36 import recent_births, recent_deaths
 
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents,check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US07_24 import age_is_legal, unique_family_by_spouse
@@ -356,6 +356,25 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         self.assertEqual(corresponding_entries(individuals,families,tag_positions), ["ANOMALY: US26,either line {83} does not have corresponding entry"])
 
+    def test_US_09(self):
+        file_name="US_09,US_10.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthBeforeDeathOfMother(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US09, line{30},Sofia Milano born after death of mother Maria Ferrari'])
+        self.assertEqual(check_BirthAfterDeathOfFather(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US09, line{89},Suyash Jha born 9 months after death of father Jash Jha'])
+    
+    def test_US_10(self):
+        file_name="US_09,US_10.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_BirthofParents(individuals,families, tag_positions), [
+            'ANOMALY: FAMILY: US10, line{30}, Sofia Milano Mother of child Isabella Milano is less than 14 years old'])
 
 if __name__ == "__main__":
     unittest.main()

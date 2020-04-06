@@ -6,10 +6,8 @@ from US_25 import US_25
 from US_38 import US_38
 from US_39 import US_39
 from US35_36 import recent_births, recent_deaths
-
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents, check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents
 from US16_21 import check_correct_gender, check_last_names
-
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US_34 import US_34
@@ -85,11 +83,11 @@ if __name__ == "__main__":
     individuals, families, tag_positions = parse_gedcom(
         file_path, 'outputs/output.txt')
 
-    for warning in bigamy(individuals, families, tag_positions):
-        print(warning)  # Oscar Milano
+    # for warning in bigamy(individuals, families, tag_positions):
+    #     print(warning)  # Oscar Milano
 
-    for warning in first_cousins_married(individuals, families, tag_positions):
-        print(warning)
+    # for warning in first_cousins_married(individuals, families, tag_positions):
+    #     print(warning)
 
     for warning in check_BirthDate(individuals, tag_positions):
         print(warning)
@@ -117,24 +115,24 @@ if __name__ == "__main__":
     # Sprint 2
 
     # User Story 15
-    for warning in check_sibling_counts(individuals, families, tag_positions):
-        print(warning)
+    # for warning in check_sibling_counts(individuals, families, tag_positions):
+    #     print(warning)
 
-    # User Story 20
-    for warnings in check_marriage_aunts_uncles(individuals, families, tag_positions):
-        print(warnings)
+    # # User Story 20
+    # for warnings in check_marriage_aunts_uncles(individuals, families, tag_positions):
+    #     print(warnings)
 
-    # User Story 04
-    for warnings in marriage_before_divorce(individuals, families, tag_positions):
-        print(warnings)
+    # # User Story 04
+    # for warnings in marriage_before_divorce(individuals, families, tag_positions):
+    #     print(warnings)
 
-    # User Story 05
-    for warnings in marriage_before_death(individuals, families, tag_positions):
-        print(warnings)
+    # # User Story 05
+    # for warnings in marriage_before_death(individuals, families, tag_positions):
+    #     print(warnings)
 
-    # User Story 06
-    for warnings in divorce_before_death(individuals, families, tag_positions):
-        print(warnings)
+    # # User Story 06
+    # for warnings in divorce_before_death(individuals, families, tag_positions):
+    #     print(warnings)
 
     # User Story 38
     for warnings in US_38(individuals, families, tag_positions):
@@ -180,3 +178,14 @@ if __name__ == "__main__":
     #User Story 26
     for warnings in corresponding_entries(individuals,families,tag_positions):
         print(warnings)
+    #User Story 09
+    for warning in check_BirthBeforeDeathOfMother(individuals,families, tag_positions):
+        print(warning)
+    #User Story 09
+    for warning in check_BirthAfterDeathOfFather(individuals,families, tag_positions):
+        print(warning)
+    #User Story 10
+    for warning in check_BirthofParents(individuals,families, tag_positions):
+        print(warning)
+
+
