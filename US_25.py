@@ -11,14 +11,14 @@ def US_25(individuals, families, tag_positions):
             num = tag_positions[child_id]['NAME']
             child = individuals[child_id]
             if child.name in names:
-                warnings.append(f'ANOMALY: US25: line {names[child.name] | num}, There are multiple {child.name} in the family.')
+                warnings.append(f'ANOMALY: FAMILY: US25: line {names[child.name] | num}, There are multiple {child.name} in the family.')
             
             names[child.name] |= num
             
             num = tag_positions[child_id]['BIRT']
             if child.birth in birth_dates:
                 birthdate = convert_date_to_string(child.birth)
-                warnings.append(f'ANOMALY: US25: line {birth_dates[child.birth] | num}, There are multiple people born on {birthdate} in the family.')
+                warnings.append(f'ANOMALY: FAMILY: US25: line {birth_dates[child.birth] | num}, There are multiple people born on {birthdate} in the family.')
 
             if child.birth:    
                 birth_dates[child.birth] |= num
