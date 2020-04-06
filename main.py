@@ -13,6 +13,7 @@ from US31_32 import multiple_birth, listLivingSingle
 from US_34 import US_34
 from US_37 import US_37
 from US_26_33 import corresponding_entries,list_orphans
+from US07_24 import age_is_legal, unique_family_by_spouse
 
 def parse_gedcom(path, output_path):
     """Parses the file"""
@@ -163,6 +164,13 @@ if __name__ == "__main__":
         print(warnings)
     # User Story 32
     for warning in listLivingSingle(individuals, families, tag_positions):
+        print(warning)
+    
+    # User Story 07
+    for warning in age_is_legal(individuals, families, tag_positions):
+        print(warning)
+    # User Story 24
+    for warning in unique_family_by_spouse(individuals, families, tag_positions):
         print(warning)
 
     # User Story 34
