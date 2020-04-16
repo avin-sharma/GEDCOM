@@ -285,7 +285,7 @@ class TestGEDCOM(unittest.TestCase):
             'ANOMALY: FAMILY: US08, line {40},Samir Shah was born before marriage of parents'])
         self.assertEqual(check_BirthAfterDivorceOfParents(individuals, families, tag_positions), [
             'ANOMALY: FAMILY: US08, line {56},Raj Shah born more than 9 months after divorce of parents'])
-
+    """
     def test_US_38(self):
         file_name = 'US_38_39.ged'
         file_path = os.path.join(
@@ -303,7 +303,7 @@ class TestGEDCOM(unittest.TestCase):
             file_path, 'outputs/test_output.txt')
         self.assertEqual(US_39(individuals, families, tag_positions), [
                          "ANOMALY: FAMILY: US39: line {35} and {24}, The upcoming anniversaries in next 30 days is of Dhiru Shah and Gari Jain on Apr 07 2000"])
-
+    """
     def test_US_07(self):
         file_name = 'US_07.ged'
         file_path = os.path.join(
