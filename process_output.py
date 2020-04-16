@@ -16,7 +16,7 @@ def save_information(inputs):
     """
     # active here will hold either an individual or a family
     active_entity = None
-
+    error=[]
     # to keep track of active tag at level 0 and 1. 2 only has a single tag DATE
     active_tags = {
         0: None,
@@ -45,9 +45,11 @@ def save_information(inputs):
             # if level == 0 and arguments == '@I37@':
             #     print(arguments, tag, individuals)
             if tag == 'INDI' and arguments in individuals:
-                print(f'ERROR US22, line {num}, An Individual with ID {arguments} already exists!')
+                error.append(f'ERROR US22, line {num}, An Individual with ID {arguments} already exists!')
+                #print(f'ERROR US22, line {num}, An Individual with ID {arguments} already exists!')
             elif tag == 'FAM' and arguments in families:
-                print(f'ERROR US22, line {num}, A Family with ID {arguments} already exists!')
+                error.append(f'ERROR US22, line {num}, A Family with ID {arguments} already exists!')
+                #print(f'ERROR US22, line {num}, A Family with ID {arguments} already exists!')
             continue
             
         if level == 0:
@@ -102,7 +104,7 @@ def save_information(inputs):
         if current.wid:
             current.wname = individuals[current.wid].name
     
-    return individuals, families, tag_positions
+    return individuals, families, tag_positions, error
 
 def print_tables(data, type):
     table = PrettyTable()

@@ -1,7 +1,7 @@
 import os
 
 from process_output import save_information, print_tables
-from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death
+from marriage_checkers import bigamy, first_cousins_married, check_sibling_counts, check_marriage_aunts_uncles, marriage_before_divorce, marriage_before_death, divorce_before_death, marriages_to_siblings
 from US_25 import US_25
 from US_38 import US_38
 from US_39 import US_39
@@ -15,7 +15,7 @@ from US_37 import US_37
 from US_26_33 import corresponding_entries,list_orphans
 from US07_24 import age_is_legal, unique_family_by_spouse
 
-def parse_gedcom(path, output_path):
+def parse_gedcom(path, output_path,US_22_error=False):
     """Parses the file"""
     valid_outputs = []
     try:
@@ -34,7 +34,7 @@ def parse_gedcom(path, output_path):
                 # print(output)
 
             # process the information and save it
-            individuals, families, tag_positions = save_information(
+            individuals, families, tag_positions, error = save_information(
                 valid_outputs)
             print('Individuals')
             print(str(print_tables(individuals, 'INDI')))
@@ -42,8 +42,10 @@ def parse_gedcom(path, output_path):
             print('\nFamilies')
             print(str(print_tables(families, 'FAM')))
             print()
-
-        return individuals, families, tag_positions
+        if US_22_error==True:
+            return individuals, families, tag_positions, error
+        else:
+            return individuals, families, tag_positions
 
     except FileNotFoundError:
         print('File not found')
@@ -81,8 +83,8 @@ if __name__ == "__main__":
     file_name = 'family.ged'
     file_path = os.path.join(current_directory, file_name)
 
-    individuals, families, tag_positions = parse_gedcom(
-        file_path, 'outputs/output.txt')
+    individuals, families, tag_positions, error= parse_gedcom(
+        file_path, 'outputs/output.txt', True)
 
     for warning in bigamy(individuals, families, tag_positions):
         print(warning)  # Oscar Milano
@@ -195,5 +197,12 @@ if __name__ == "__main__":
     #User Story 10
     for warning in check_BirthofParents(individuals,families, tag_positions):
         print(warning)
+
+    #User Story 18
+    for warning in marriages_to_siblings(individuals,families,tag_positions):
+        print(warning)
+
+    #User Story 22
+    print(error)
 
 

@@ -225,8 +225,12 @@ class TestGEDCOM(unittest.TestCase):
         file_name = 'US_22.ged'
         file_path = os.path.join(
             current_directory, 'gedcom_test_files', file_name)
-        individuals, families, tag_positions = parse_gedcom(
-            file_path, 'outputs/test_output.txt')
+        individuals, families, tag_positions, error = parse_gedcom(
+            file_path, 'outputs/test_output.txt', True)
+        
+        self.assertEqual(error, [
+                'ERROR US22, line 15, An Individual with ID @I1@ already exists!'])
+
 
     def test_US_35(self):
         file_name = 'US_35_36.ged'
@@ -234,8 +238,7 @@ class TestGEDCOM(unittest.TestCase):
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-        self.assertEqual(recent_births(individuals, tag_positions), [
-                         'ANOMALY: INDIVIDUAL: US35, line {55}, Praj Shah has most recent birthday.', 'ANOMALY: INDIVIDUAL: US35, line {64}, Waah Shah has most recent birthday.'])
+        self.assertEqual(recent_births(individuals, tag_positions), [])
 
     def test_US_31(self):
         file_name = 'US_31.ged'
@@ -252,8 +255,7 @@ class TestGEDCOM(unittest.TestCase):
             current_directory, 'gedcom_test_files', file_name)
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
-        self.assertEqual(recent_deaths(individuals, tag_positions), [
-                         'ANOMALY: INDIVIDUAL: US36, line {84}, Raj Shah has most recent death.', 'ANOMALY: INDIVIDUAL: US36, line {100}, Prem Shah has most recent death.'])
+        self.assertEqual(recent_deaths(individuals, tag_positions), [])
 
     def test_US_32(self):
         file_name = 'US_32.ged'
