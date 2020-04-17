@@ -6,7 +6,7 @@ from US_25 import US_25
 from US_38 import US_38
 from US_39 import US_39
 from US35_36 import recent_births, recent_deaths
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents, check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents, check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents, check_ParentsNotTooOld, check_MultipleBirths
 from US16_21 import check_correct_gender, check_last_names
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
@@ -204,5 +204,12 @@ if __name__ == "__main__":
 
     #User Story 22
     print(error)
+
+    #User Story 12
+    for warning in check_ParentsNotTooOld(individuals,families, tag_positions):
+        print(warning)
+    #User Story 14  
+    for warning in check_MultipleBirths(individuals,families, tag_positions):
+        print(warning)
 
 
