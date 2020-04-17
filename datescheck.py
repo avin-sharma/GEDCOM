@@ -144,3 +144,44 @@ def check_BirthofParents(individuals,families, tag_positions):
                     num = tag_positions[family.wid]['BIRT']
                     warnings.append(f'ANOMALY: FAMILY: US10, line{num}, {individual_mother.name} Mother of child {individual_child.name} is less than 14 years old')
     return warnings
+
+#US12 Parents not too old Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
+
+def check_ParentsNotTooOld(individuals,families, tag_positions):
+    warnings = []
+    for fam_id in families:
+        family = families[fam_id]
+        if family.hid != None:
+            individual_father = individuals[family.hid]
+        if family.wid != None:
+            individual_mother = individuals[family.wid]
+            for child_id in family.children:
+                individual_child = individuals[child_id]
+                if individual_father.age != None and individual_child.age != None:
+                    diff = individual_father.age - individual_child.age
+                    if(diff >= 80):
+                        num = tag_positions[family.hid]['BIRT']
+                        warnings.append(f'ANOMALY: FAMILY: US12, line{num}, {individual_father.name} Father of child {individual_child.name} is elder by 80 or more years')
+                if individual_mother.age != None and individual_child.age != None:
+                    diff = individual_mother.age - individual_child.age
+                    if(diff >= 60):
+                        num = tag_positions[family.wid]['BIRT']
+                        warnings.append(f'ANOMALY: FAMILY: US12, line{num}, {individual_mother.name} Mother of child {individual_child.name} is elder by 60 or more years')        
+    return warnings
+
+#US14 Multiple births <= 5 No more than five siblings should be born at the same time
+def check_MultipleBirths(individuals,families, tag_positions):
+    warnings = []
+    dob = {}
+    for fam_id in families:
+        family = families[fam_id]
+        if len(family.children) > 5:
+            for child_id in family.children:
+                individual_child = individuals[child_id]
+                if individual_child.birth != None:
+                    dob[individual_child.birth] = dob.get(individual_child.birth, 0) + 1
+            for val in dob.values():
+                if val > 5:
+                    warnings.append(f'ANOMALY: FAMILY: US14 {fam_id} has more than 5 siblings born on same time')
+                    break
+    return warnings

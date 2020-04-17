@@ -16,7 +16,7 @@ from US_39 import US_39
 from US16_21 import check_correct_gender, check_last_names
 from US35_36 import recent_births, recent_deaths
 
-from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents,check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents
+from datescheck import check_BirthDate, check_MarriageDate, check_DivorceDate, check_DeathDate, check_BirthBeforeMarriage, check_BirthBeforeDeath, check_BirthBeforeMarriageOfParents, check_BirthAfterDivorceOfParents,check_BirthBeforeDeathOfMother, check_BirthAfterDeathOfFather, check_BirthofParents, check_ParentsNotTooOld,check_MultipleBirths
 from name_birth import unique_name_and_birth
 from US31_32 import multiple_birth, listLivingSingle
 from US07_24 import age_is_legal, unique_family_by_spouse
@@ -378,5 +378,22 @@ class TestGEDCOM(unittest.TestCase):
         self.assertEqual(check_BirthofParents(individuals,families, tag_positions), [
             'ANOMALY: FAMILY: US10, line{30}, Sofia Milano Mother of child Isabella Milano is less than 14 years old'])
 
+    def test_US_12(self):
+        file_name="US_12,US_14.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_ParentsNotTooOld(individuals,families, tag_positions),
+        ['ANOMALY: FAMILY: US12, line{94}, Roberto Milano Father of child Sofia Milano is elder by 80 or more years','ANOMALY: FAMILY: US12, line{103}, Maria Ferrari Mother of child Sofia Milano is elder by 60 or more years'])
+        
+
+    def test_US_14(self):
+        file_name="US_12,US_14.ged"
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(check_MultipleBirths(individuals,families, tag_positions), ['ANOMALY: FAMILY: US14 @F13@ has more than 5 siblings born on same time'])    
 if __name__ == "__main__":
     unittest.main()
