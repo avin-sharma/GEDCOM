@@ -23,7 +23,7 @@ from US07_24 import age_is_legal, unique_family_by_spouse
 from US_34 import US_34
 from US_37 import US_37
 from US_26_33 import list_orphans, corresponding_entries
-
+from US27_30 import listLivingMarried,includeindividualage
 
 
 current_directory = os.getcwd()
@@ -395,5 +395,24 @@ class TestGEDCOM(unittest.TestCase):
         individuals, families, tag_positions = parse_gedcom(
             file_path, 'outputs/test_output.txt')
         self.assertEqual(check_MultipleBirths(individuals,families, tag_positions), ['ANOMALY: FAMILY: US14 @F13@ has more than 5 siblings born on same time'])    
+
+    def test_US_27(self):
+        file_name = 'US_27.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(includeindividualage(individuals, families, tag_positions), [
+                         'INDIVIDUAL: US27,Above Table shows individuals with their age'])
+
+    def test_US_30(self):
+        file_name = 'US_27.ged'
+        file_path = os.path.join(
+            current_directory, 'gedcom_test_files', file_name)
+        individuals, families, tag_positions = parse_gedcom(
+            file_path, 'outputs/test_output.txt')
+        self.assertEqual(listLivingMarried(individuals, families, tag_positions), [
+                         'INDIVIDUAL: US30,Above Table shows individuals who are married and alive'])
+
 if __name__ == "__main__":
     unittest.main()
