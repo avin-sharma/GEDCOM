@@ -14,6 +14,7 @@ from US_34 import US_34
 from US_37 import US_37
 from US_26_33 import corresponding_entries,list_orphans
 from US07_24 import age_is_legal, unique_family_by_spouse
+from US27_30 import listLivingMarried,includeindividualage
 
 def parse_gedcom(path, output_path,US_22_error=False):
     """Parses the file"""
@@ -211,5 +212,10 @@ if __name__ == "__main__":
     #User Story 14  
     for warning in check_MultipleBirths(individuals,families, tag_positions):
         print(warning)
-
+    # User Story 27
+    for warnings in includeindividualage(individuals,families,tag_positions):
+        print(warnings)
+    # User Story 30
+    for warnings in listLivingMarried(individuals,families,tag_positions):
+        print(warnings)
 
