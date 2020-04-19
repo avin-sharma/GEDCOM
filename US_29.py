@@ -1,6 +1,7 @@
 from helpers import convert_date_to_string, check_and_convert_string_to_date
 from datetime import date, datetime, timedelta
 from collections import defaultdict
+from typing import List
 
 def US_29(individuals, families, tag_positions):
     warnings = []
