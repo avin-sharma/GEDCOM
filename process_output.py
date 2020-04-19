@@ -134,5 +134,6 @@ def print_tables(data, type):
                 current.wid if current.wid else 'NA',
                 current.wname if current.wname else 'NA',
                 current.children if current.children else 'NA',
+                #sorted(current.children, key = lambda x:individuals[x].birth if individuals[x].birth else datetime.now() if current.children else 'NA')
             ])
     return table
